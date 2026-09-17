@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Editors and OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Nothing machine-specific belongs in this repository.
+# If you generate a local Brewfile or package dump while reading the handbook,
+# it stays out of Git.
+Brewfile
+*-inventory.json
