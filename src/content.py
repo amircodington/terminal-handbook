@@ -1,23 +1,47 @@
 """The handbook content: worked examples, workflows, shortcuts and lessons.
 
 Each row is `title | command | explanation | level | effect`, with ` ;; ` marking a
-line break inside a command. `effect` drives the badge colour in the page, so it
-has to stay honest: Inspect reads, Write touches the filesystem, Disruptive stops
+line break inside a command. A command may contain literal pipes; an explanation
+may not (see `rows`). `effect` drives the badge colour in the page, so it has to
+stay honest: Inspect reads, Write touches the filesystem, Disruptive stops
 something running, Destructive cannot be undone.
+
+The category label that shares a row block also picks the fallback documentation
+link for every row in it; build.py refines that per command where it can.
 
 Examples use placeholder paths such as ~/projects/your-app. Replace them.
 """
+import re
+
+_IDS = set()
 RECIPES = []
-def rows(category, tool, source, text):
+
+
+def slug(text):
+    """A stable id for a recipe, so saved bookmarks survive new rows landing above."""
+    return re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
+
+
+def rows(category, source, text):
+    """Parse one block of `title | command | explanation | level | effect` rows.
+
+    The command may contain literal pipes: the title is split from the left and
+    the last three fields from the right, so everything between them is the
+    command. The explanation must not contain ` | ` for the same reason.
+    """
     for line in text.strip().splitlines():
-        if not line.strip(): continue
+        if not line.strip():
+            continue
         title, remainder = line.split(' | ', 1)
         command, explanation, level, effect = remainder.rsplit(' | ', 3)
-        RECIPES.append(dict(id=f'r{len(RECIPES)+1}', category=category, tool=tool,
-                            title=title, command=command.replace(' ;; ', '\n'),
+        recipe_id = f'{slug(category)}-{slug(title)}'
+        assert recipe_id not in _IDS, f'duplicate recipe id: {recipe_id}'
+        _IDS.add(recipe_id)
+        RECIPES.append(dict(id=recipe_id, category=category, title=title,
+                            command=command.replace(' ;; ', '\n'),
                             explanation=explanation, level=level, effect=effect, source=source))
 
-rows('Shell foundations','zsh','https://zsh.sourceforge.io/Doc/Release/',r'''
+rows('Shell foundations', 'https://zsh.sourceforge.io/Doc/Release/',r'''
 Know where you are | pwd | Print your current directory before running project commands. Relative paths start here. | Start | Inspect
 Find what a command really is | whence -va python3 pnpm git ls | Shows aliases, functions and every executable match, in the order zsh would pick them. This is how you discover that ls is really an alias for eza. | Start | Inspect
 Read your PATH | print -l -- $path | zsh exposes PATH as an array. The first matching executable wins. | Start | Inspect
@@ -29,8 +53,9 @@ Quote paths with spaces | ls -ld "$HOME/Library/Application Support" | Double qu
 Capture command output | project_root=$(git rev-parse --show-toplevel) ;; print -r -- "$project_root" | Command substitution captures stdout. Use this inside a Git repository. | Intermediate | Inspect
 Act only after success | pnpm lint && pnpm typecheck | && runs the second command only if the first exits successfully. Run in a project with both scripts. | Intermediate | Run
 Count tracked source files | git ls-files '*.ts' '*.tsx' | Count or inspect tracked files without searching node_modules. Add a pipe to wc -l for the count. | Intermediate | Inspect
-Understand pipe failures | (setopt pipefail; false \| cat; print -r -- "exit=$?") | Replace the escaped pipe with a literal pipe before trying. pipefail makes an upstream failure visible in the pipeline status. | Advanced | Run
-Inspect a pipeline's statuses | printf 'hello\n' | Each command returns an exit status: 0 means success. Immediately after a pipeline, print -l -- $pipestatus shows every stage. | Intermediate | Run
+Build a pipeline | git ls-files '*.ts' '*.tsx' | wc -l | A pipe sends one command's stdout into the next. This counts tracked TypeScript files without walking node_modules. | Intermediate | Inspect
+Understand pipe failures | (setopt pipefail; false | cat; print -r -- "exit=$?") | Without pipefail, cat succeeds and hides the failure from false, so the pipeline reports success. The subshell keeps the option local. | Advanced | Run
+Inspect a pipeline's statuses | printf 'hello\n' | wc -c | Every command returns an exit status, where 0 means success. Immediately after a pipeline, print -l -- $pipestatus shows the status of each stage. | Intermediate | Run
 Write output without clobbering | printf '%s\n' 'hello' > terminal-practice.txt | If you have set NO_CLOBBER (setopt noclobber), > refuses to replace an existing file. Use a fresh filename. | Start | Write
 Append a line | printf '%s\n' 'another line' >> terminal-practice.txt | >> appends. Use >| only when you deliberately want to overwrite despite NO_CLOBBER. | Start | Write
 Keep spaces safe when iterating | for file in *.md(N); do print -r -- "$file"; done | (N) makes an unmatched zsh glob expand to nothing. Quote the variable on use. | Advanced | Inspect
@@ -41,13 +66,8 @@ Start a clean shell | zsh -f | Start a shell without your normal startup files. 
 Show completion paths | print -l -- $fpath | These directories contain completion functions, including Homebrew's site-functions directory. | Intermediate | Inspect
 Open this handbook | open index.html | Opens the handbook in your browser. It is a single file and works offline. On Linux, use xdg-open index.html. | Start | Run
 ''')
-# Pipes use a separate entry path so the row delimiter remains unambiguous.
-RECIPES = [r for r in RECIPES if r['title'] not in ('Understand pipe failures','Inspect a pipeline\'s statuses')]
-RECIPES.extend([
-dict(id='shell-pipe',category='Shell foundations',tool='zsh',title='Build a pipeline',command="git ls-files '*.ts' '*.tsx' | wc -l",explanation='Send stdout from Git into wc. This counts tracked TypeScript files, avoiding dependency folders.',level='Intermediate',effect='Inspect',source='https://zsh.sourceforge.io/Doc/Release/'),
-dict(id='shell-pipefail',category='Shell foundations',tool='zsh',title='Understand pipe failures',command="(setopt pipefail; false | cat; print -r -- \"exit=$?\")",explanation='The subshell keeps the setting local. Without pipefail, cat can succeed and hide the failure from false. After a pipeline, print -l -- $pipestatus shows each stage.',level='Advanced',effect='Run',source='https://zsh.sourceforge.io/Doc/Release/')])
 
-rows('Find & navigate','eza / fd / rg / zoxide / fzf','https://github.com/sharkdp/fd',r'''
+rows('Find & navigate', 'https://github.com/sharkdp/fd',r'''
 Save a jump as an alias | alias work='cd ~/projects' | An alias is a saved command. Add the line to your .zshrc to keep it after this session, then open a new shell. | Start | Run
 Jump by remembered name | z your-app | zoxide learns visited directories. zi opens an interactive picker. Visit the directory with cd first if it is unknown. | Start | Run
 See files with Git status | eza -lah --git --icons=auto | A detailed directory listing. Your ll alias does the same with icons always enabled. | Start | Inspect
@@ -68,7 +88,7 @@ Plain portable directory tree | tree -L 2 -I 'node_modules|vendor|.git' | tree i
 Count your codebase | tokei . --exclude node_modules --exclude vendor | Shows source line counts by language. Size is a navigation aid, not a quality score. | Intermediate | Inspect
 ''')
 
-rows('Git & GitHub','git / delta / lazygit / gh','https://git-scm.com/docs',r'''
+rows('Git & GitHub', 'https://git-scm.com/docs',r'''
 Understand current changes | git status --short --branch | Your gss alias gives short status; gs gives the detailed version. | Start | Inspect
 Review unstaged changes | git diff | delta is already your configured pager. q exits; n and N navigate files when navigation is active. | Start | Inspect
 Review what will be committed | git diff --staged | Always check staged content before committing. gds is your alias. | Start | Inspect
@@ -96,7 +116,7 @@ Inspect failed CI logs | gh run view RUN_ID --log-failed | Replace RUN_ID with a
 Create a draft PR | gh pr create --draft | Opens an interactive draft-PR flow and sends content to GitHub. Review title, body and target branch. | Intermediate | Remote write
 ''')
 
-rows('Web development','Node / pnpm / Volta','https://pnpm.io/cli/run',r'''
+rows('Web development', 'https://pnpm.io/cli/run',r'''
 Check runtime selection | volta list | Shows the default Node and the tools Volta manages. Without Volta, use node --version and which -a node. | Start | Inspect
 See the actual Node binary | volta which node | Shows the executable Volta would select in the current project. | Intermediate | Inspect
 List project scripts | pnpm run | With no script, pnpm lists the scripts declared in package.json. Use this before assuming test or dev exists. | Start | Inspect
@@ -117,7 +137,7 @@ Run any declared script | pnpm run build:types | Replace build:types with a scri
 Inspect npm globals | npm list -g --depth=0 | A diagnostic inventory. Keep application dependencies in their projects. | Intermediate | Inspect
 ''')
 
-rows('Containers & WordPress','Docker / Compose / WP-CLI','https://docs.docker.com/reference/cli/docker/compose/',r'''
+rows('Containers & WordPress', 'https://docs.docker.com/reference/cli/docker/compose/',r'''
 Check the VM (macOS) | colima status | On macOS, Docker needs a Linux VM. Colima reports its CPU, memory and mount settings. On Linux there is no VM: containers use the host kernel. | Start | Inspect
 Check Docker's destination | docker context show | Shows which engine your docker commands reach. A context name is not proof that anything is running. | Start | Inspect
 List Docker contexts | docker context ls | Verify the target before running commands, especially if remote contexts are added later. | Intermediate | Inspect
@@ -148,7 +168,7 @@ List Helm releases | helm list --all-namespaces | Read-only cluster query; requi
 Kubernetes dashboard | k9s --readonly | Opens the read-only dashboard for the selected context. | Advanced | Inspect
 ''')
 
-rows('Python & local AI','uv / Python / Ollama','https://docs.astral.sh/uv/',r'''
+rows('Python & local AI', 'https://docs.astral.sh/uv/',r'''
 List installed Python runtimes | uv python list --only-installed | A machine usually has several Pythons: the system one, a package-manager one and uv's. They are not interchangeable. | Start | Inspect
 List isolated Python tools | uv tool list | Tools installed with uv tool install each get their own environment, so a CLI cannot break your projects. | Start | Inspect
 Use a project's environment | uv run python --version | In a uv project, respects the project's environment and Python requirements; may create or sync the environment. | Start | Run
@@ -169,14 +189,14 @@ Inspect llama.cpp options | llama-cli --help | Runs GGUF models directly, withou
 Run a local GGUF model | llama-cli -m /path/to/model.gguf -p 'Explain this project' -n 128 -c 2048 | Replace the file path. Context size and GPU offload settings decide how much memory this takes. | Advanced | Run
 ''')
 
-rows('Data, files & media','jq / yq / tools','https://jqlang.org/manual/',r'''
+rows('Data, files & media', 'https://jqlang.org/manual/',r'''
 Read a JSON field | jq '.scripts' package.json | Print just the scripts object. jq is for structured data; rg is for textual searching. | Start | Inspect
 Get raw JSON text | jq -r '.name' package.json | -r outputs the string without JSON quotation marks. | Start | Inspect
 Validate JSON | jq empty package.json | A successful exit confirms valid JSON; it does not validate an application-specific schema. | Intermediate | Inspect
 Browse large JSON interactively | jless package.json | Navigate structured data without printing a giant document. q quits. | Start | Inspect
 Read Compose service names from YAML | yq '.services | keys' docker-compose.yml | Reads the raw YAML without Compose's variable interpolation. This is Mike Farah's Go yq, not the Python one. | Intermediate | Inspect
 Read Markdown nicely | glow README.md | Renders Markdown in the terminal. Helpful for project instructions. | Start | Inspect
-Preview a text substitution | printf '%s\n' 'old-name' | Use sd 'old-name' 'new-name' on piped text to preview. Passing a filename edits the file in place. | Intermediate | Inspect
+Preview a text substitution | printf '%s\n' 'old-name' | sd 'old-name' 'new-name' | Transform piped text first to see the result. Passing a filename to sd instead edits that file in place, with no undo. | Intermediate | Inspect
 Edit a known string in one file | sd 'old-name' 'new-name' path/to/file | Replace placeholders; edits in place. Review git diff afterwards and use a narrow path. | Intermediate | Write
 Watch files and rerun tests | watchexec -e py -- uv run pytest | Runs tests after Python files change. Requires pytest in that project. Ctrl+C stops the watcher. | Intermediate | Run
 Benchmark two read-only commands | hyperfine --warmup 2 'rg TODO . -g *.ts' 'rg -F TODO . -g *.ts' | Example comparison of regex vs literal search. Run in a suitable repo; benchmark commands execute repeatedly. | Advanced | Run
@@ -198,11 +218,8 @@ Inspect Go environment paths | go env GOPATH GOMOD GOROOT | Select only needed f
 Check a language server | gopls version | Language servers power editor completion and diagnostics. They normally run through the editor, not by hand. | Intermediate | Inspect
 Inspect a tree-sitter grammar | tree-sitter --help | Parser tooling behind modern syntax highlighting. The library and the CLI are separate packages. | Advanced | Inspect
 ''')
-# Fix examples containing literal pipes without confusing the source row format.
-for r in RECIPES:
-    if r['title']=='Preview a text substitution': r['command']="printf '%s\\n' 'old-name' | sd 'old-name' 'new-name'";r['explanation']='Transform piped text first to preview the result. Passing a filename to sd instead edits that file in place.'
 
-rows('Networking & processes','curl / lsof / btop','https://curl.se/docs/manpage.html',r'''
+rows('Networking & processes', 'https://curl.se/docs/manpage.html',r'''
 Check HTTP headers | curl -I https://example.com | Sends a HEAD request. Useful for redirects, caching and content type without downloading the page body. | Start | Network
 Inspect a local web app | curl -sS -o /dev/null -w '%{http_code}\n' http://localhost:3000 | Prints the HTTP status code. It fails if no service is listening. | Intermediate | Network
 Read a local JSON API | xh GET http://localhost:3000/api/health | Friendly HTTP client. Replace with an endpoint your application actually implements. | Start | Network
@@ -235,7 +252,7 @@ List GPG public keys | gpg --list-keys | Read-only inventory of public keys. Nev
 Inspect a file type | file path/to/file | Useful before deciding whether a file is text, binary, an archive or an executable. | Start | Inspect
 ''')
 
-rows('Editors & sessions','Neovim / tmux / direnv','https://github.com/tmux/tmux/wiki',r'''
+rows('Editors & sessions', 'https://github.com/tmux/tmux/wiki',r'''
 Open a project in VS Code | code . | Opens the current directory, if the code command is on your PATH. Set EDITOR="code --wait" so Git waits for the window to close. | Start | Run
 Open a terminal editor | nvim README.md | Neovim with no configuration is already usable. Distributions such as LazyVim add language support on top. | Start | Run
 Learn Vim interactively | nvim +Tutor | Opens Neovim's tutorial. Esc returns to normal mode; :q exits, :w saves. | Start | Run
@@ -249,7 +266,7 @@ Check direnv state | direnv status | Shows whether this directory's environment 
 Allow a reviewed environment | direnv allow . | Executes the directory's .envrc as shell code. Read it first, especially in a newly cloned repository. | Intermediate | Run
 ''')
 
-rows('Packages & maintenance','Homebrew / apt / uv','https://docs.brew.sh/Manpage',r'''
+rows('Packages & maintenance', 'https://docs.brew.sh/Manpage',r'''
 Get short practical help | tldr tar | tealdeer provides the tldr executable. If its cache is missing, tldr --update downloads examples. | Start | Inspect
 Read full help | rg --help | Almost every tool answers --help. Use man for system commands, and SUBCOMMAND --help for nested CLIs such as git or docker. | Start | Inspect
 Inspect a package | brew info ripgrep | Shows version, description, dependencies and installation details. Package name ripgrep provides executable rg. | Start | Inspect
@@ -273,7 +290,7 @@ See local pnpm storage | pnpm store path | Prints the shared content-addressed s
 Check Git settings with origins | git config --show-origin --get-regexp '^(core.pager|fetch.prune|pull.rebase|delta\.)' | Shows which file each setting came from. A narrow pattern avoids dumping credentials and private remote URLs. | Advanced | Inspect
 ''')
 
-rows('Shell foundations','Core text tools','https://www.gnu.org/software/coreutils/manual/',r'''
+rows('Shell foundations', 'https://www.gnu.org/software/coreutils/manual/',r'''
 Read a file without decorations | command cat README.md | Plain text is best for pipelines and scripts; bat is useful for interactive reading. | Start | Inspect
 Read the beginning of a log | head -n 40 app.log | Replace the example filename. Avoid printing entire large logs or files containing secrets. | Start | Inspect
 Follow a rotating log | tail -F app.log | Follows the filename across replacement or rotation. Ctrl+C stops watching. | Intermediate | Inspect
@@ -289,7 +306,7 @@ Inspect file permissions | stat -f '%Sp %Su %Sg %N' README.md | Shows mode, owne
 Understand an executable permission | ls -l script.zsh | Inspect before changing modes. chmod u+x script.zsh adds execute permission for the owner only. | Intermediate | Inspect
 ''')
 
-rows('macOS specifics','macOS utilities','https://support.apple.com/guide/terminal/welcome/mac',r'''
+rows('macOS specifics', 'https://support.apple.com/guide/terminal/welcome/mac',r'''
 Search with Spotlight | mdfind -onlyin ~/projects 'kMDItemFSName == "README.md"' | Uses the Spotlight index, so an empty result is not proof a file is absent. fd reads the directory itself. | Intermediate | Inspect
 Inspect mounted disks | diskutil list | Lists disks and partitions without modifying them. Disk erase and repair subcommands are separate operations. | Intermediate | Inspect
 Inspect network interfaces | networksetup -listallhardwareports | Maps hardware ports to device names such as en0. Does not change network configuration. | Intermediate | Inspect
@@ -309,7 +326,7 @@ Copy one file over SSH | scp ./report.txt user@example-host:/path/to/destination
 Check the selected editor | print -r -- "$EDITOR" | Git and other tools open this. A value such as code --wait makes them wait for the window to close. | Start | Inspect
 ''')
 
-rows('Linux specifics','systemd / apt / ss','https://www.freedesktop.org/software/systemd/man/',r'''
+rows('Linux specifics', 'https://www.freedesktop.org/software/systemd/man/',r'''
 Identify the distribution | cat /etc/os-release | Tells you which package manager and package names apply. Scripts should read ID and VERSION_ID rather than guessing. | Start | Inspect
 See listening ports | ss -tlnp | The Linux answer to lsof for ports. Process names for other users' processes need sudo. | Start | Inspect
 Check a service | systemctl status docker | Shows whether a service is enabled, running and what it last logged. Replace docker with any unit name. | Start | Inspect

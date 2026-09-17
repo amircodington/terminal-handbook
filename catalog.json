@@ -1,2941 +1,2952 @@
 {
   "recipes": [
     {
-      "id": "r1",
+      "id": "shell-foundations-know-where-you-are",
       "category": "Shell foundations",
-      "tool": "pwd",
       "title": "Know where you are",
       "command": "pwd",
       "explanation": "Print your current directory before running project commands. Relative paths start here.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "pwd"
     },
     {
-      "id": "r2",
+      "id": "shell-foundations-find-what-a-command-really-is",
       "category": "Shell foundations",
-      "tool": "whence",
       "title": "Find what a command really is",
       "command": "whence -va python3 pnpm git ls",
       "explanation": "Shows aliases, functions and every executable match, in the order zsh would pick them. This is how you discover that ls is really an alias for eza.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "whence"
     },
     {
-      "id": "r3",
+      "id": "shell-foundations-read-your-path",
       "category": "Shell foundations",
-      "tool": "print",
       "title": "Read your PATH",
       "command": "print -l -- $path",
       "explanation": "zsh exposes PATH as an array. The first matching executable wins.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "print"
     },
     {
-      "id": "r4",
+      "id": "shell-foundations-learn-the-command-you-already-have",
       "category": "Shell foundations",
-      "tool": "man",
       "title": "Learn the command you already have",
       "command": "man zshbuiltins",
       "explanation": "Local manuals match the installed operating system. Press / to search and q to quit.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "man"
     },
     {
-      "id": "r5",
+      "id": "shell-foundations-inspect-an-alias",
       "category": "Shell foundations",
-      "tool": "alias",
       "title": "Inspect an alias",
       "command": "alias gs",
       "explanation": "gs expands to git status. Run alias with no arguments to list aliases.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "alias"
     },
     {
-      "id": "r6",
+      "id": "shell-foundations-inspect-a-shell-function",
       "category": "Shell foundations",
-      "tool": "functions",
       "title": "Inspect a shell function",
       "command": "functions precmd",
       "explanation": "Read a function's implementation before relying on it. Run functions with no arguments to list every function your shell has defined.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "functions"
     },
     {
-      "id": "r7",
+      "id": "shell-foundations-look-up-recent-commands",
       "category": "Shell foundations",
-      "tool": "fc",
       "title": "Look up recent commands",
       "command": "fc -l -20",
       "explanation": "Read the last 20 history entries. Ctrl+R opens your fuzzy history picker.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "fc"
     },
     {
-      "id": "r8",
+      "id": "shell-foundations-quote-paths-with-spaces",
       "category": "Shell foundations",
-      "tool": "ls",
       "title": "Quote paths with spaces",
       "command": "ls -ld \"$HOME/Library/Application Support\"",
       "explanation": "Double quotes preserve spaces and expand variables. Single quotes preserve literal text.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "ls"
     },
     {
-      "id": "r9",
+      "id": "shell-foundations-capture-command-output",
       "category": "Shell foundations",
-      "tool": "print",
       "title": "Capture command output",
       "command": "project_root=$(git rev-parse --show-toplevel)\nprint -r -- \"$project_root\"",
       "explanation": "Command substitution captures stdout. Use this inside a Git repository.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "print"
     },
     {
-      "id": "r10",
+      "id": "shell-foundations-act-only-after-success",
       "category": "Shell foundations",
-      "tool": "pnpm",
       "title": "Act only after success",
       "command": "pnpm lint && pnpm typecheck",
       "explanation": "&& runs the second command only if the first exits successfully. Run in a project with both scripts.",
       "level": "Intermediate",
       "effect": "Run",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r11",
+      "id": "shell-foundations-count-tracked-source-files",
       "category": "Shell foundations",
-      "tool": "git",
       "title": "Count tracked source files",
       "command": "git ls-files '*.ts' '*.tsx'",
       "explanation": "Count or inspect tracked files without searching node_modules. Add a pipe to wc -l for the count.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r14",
+      "id": "shell-foundations-build-a-pipeline",
       "category": "Shell foundations",
-      "tool": "printf",
+      "title": "Build a pipeline",
+      "command": "git ls-files '*.ts' '*.tsx' | wc -l",
+      "explanation": "A pipe sends one command's stdout into the next. This counts tracked TypeScript files without walking node_modules.",
+      "level": "Intermediate",
+      "effect": "Inspect",
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
+    },
+    {
+      "id": "shell-foundations-understand-pipe-failures",
+      "category": "Shell foundations",
+      "title": "Understand pipe failures",
+      "command": "(setopt pipefail; false | cat; print -r -- \"exit=$?\")",
+      "explanation": "Without pipefail, cat succeeds and hides the failure from false, so the pipeline reports success. The subshell keeps the option local.",
+      "level": "Advanced",
+      "effect": "Run",
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "(setopt"
+    },
+    {
+      "id": "shell-foundations-inspect-a-pipeline-s-statuses",
+      "category": "Shell foundations",
+      "title": "Inspect a pipeline's statuses",
+      "command": "printf 'hello\\n' | wc -c",
+      "explanation": "Every command returns an exit status, where 0 means success. Immediately after a pipeline, print -l -- $pipestatus shows the status of each stage.",
+      "level": "Intermediate",
+      "effect": "Run",
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "printf"
+    },
+    {
+      "id": "shell-foundations-write-output-without-clobbering",
+      "category": "Shell foundations",
       "title": "Write output without clobbering",
       "command": "printf '%s\\n' 'hello' > terminal-practice.txt",
       "explanation": "If you have set NO_CLOBBER (setopt noclobber), > refuses to replace an existing file. Use a fresh filename.",
       "level": "Start",
       "effect": "Write",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "printf"
     },
     {
-      "id": "r15",
+      "id": "shell-foundations-append-a-line",
       "category": "Shell foundations",
-      "tool": "printf",
       "title": "Append a line",
       "command": "printf '%s\\n' 'another line' >> terminal-practice.txt",
       "explanation": ">> appends. Use >| only when you deliberately want to overwrite despite NO_CLOBBER.",
       "level": "Start",
       "effect": "Write",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "printf"
     },
     {
-      "id": "r16",
+      "id": "shell-foundations-keep-spaces-safe-when-iterating",
       "category": "Shell foundations",
-      "tool": "for",
       "title": "Keep spaces safe when iterating",
       "command": "for file in *.md(N); do print -r -- \"$file\"; done",
       "explanation": "(N) makes an unmatched zsh glob expand to nothing. Quote the variable on use.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "for"
     },
     {
-      "id": "r17",
+      "id": "shell-foundations-see-shell-jobs",
       "category": "Shell foundations",
-      "tool": "jobs",
       "title": "See shell jobs",
       "command": "jobs -l",
       "explanation": "Ctrl+Z suspends a foreground job; fg resumes it. Ctrl+C asks the foreground process to stop.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "jobs"
     },
     {
-      "id": "r18",
+      "id": "shell-foundations-resume-a-suspended-job",
       "category": "Shell foundations",
-      "tool": "fg",
       "title": "Resume a suspended job",
       "command": "fg",
       "explanation": "Return the most recently suspended shell job to the foreground.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "fg"
     },
     {
-      "id": "r19",
+      "id": "shell-foundations-check-shell-syntax",
       "category": "Shell foundations",
-      "tool": "zsh",
       "title": "Check shell syntax",
       "command": "zsh -n ~/.zshrc",
       "explanation": "Parse the config without executing it. This catches syntax errors, not every runtime problem.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "zsh"
     },
     {
-      "id": "r20",
+      "id": "shell-foundations-start-a-clean-shell",
       "category": "Shell foundations",
-      "tool": "zsh",
       "title": "Start a clean shell",
       "command": "zsh -f",
       "explanation": "Start a shell without your normal startup files. Type exit to leave. Useful for isolating config bugs.",
       "level": "Intermediate",
       "effect": "Run",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "zsh"
     },
     {
-      "id": "r21",
+      "id": "shell-foundations-show-completion-paths",
       "category": "Shell foundations",
-      "tool": "print",
       "title": "Show completion paths",
       "command": "print -l -- $fpath",
       "explanation": "These directories contain completion functions, including Homebrew's site-functions directory.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
+      "source": "https://zsh.sourceforge.io/Doc/Release/",
+      "tool": "print"
     },
     {
-      "id": "r22",
+      "id": "shell-foundations-open-this-handbook",
       "category": "Shell foundations",
-      "tool": "open",
       "title": "Open this handbook",
       "command": "open index.html",
       "explanation": "Opens the handbook in your browser. It is a single file and works offline. On Linux, use xdg-open index.html.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://support.apple.com/guide/terminal/open-or-quit-terminal-trml35697/mac"
+      "source": "https://support.apple.com/guide/terminal/open-or-quit-terminal-trml35697/mac",
+      "tool": "open"
     },
     {
-      "id": "shell-pipe",
-      "category": "Shell foundations",
-      "tool": "git",
-      "title": "Build a pipeline",
-      "command": "git ls-files '*.ts' '*.tsx' | wc -l",
-      "explanation": "Send stdout from Git into wc. This counts tracked TypeScript files, avoiding dependency folders.",
-      "level": "Intermediate",
-      "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
-    },
-    {
-      "id": "shell-pipefail",
-      "category": "Shell foundations",
-      "tool": "(setopt",
-      "title": "Understand pipe failures",
-      "command": "(setopt pipefail; false | cat; print -r -- \"exit=$?\")",
-      "explanation": "The subshell keeps the setting local. Without pipefail, cat can succeed and hide the failure from false. After a pipeline, print -l -- $pipestatus shows each stage.",
-      "level": "Advanced",
-      "effect": "Run",
-      "source": "https://zsh.sourceforge.io/Doc/Release/"
-    },
-    {
-      "id": "r23",
+      "id": "find-navigate-save-a-jump-as-an-alias",
       "category": "Find & navigate",
-      "tool": "alias",
       "title": "Save a jump as an alias",
       "command": "alias work='cd ~/projects'",
       "explanation": "An alias is a saved command. Add the line to your .zshrc to keep it after this session, then open a new shell.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://github.com/sharkdp/fd"
+      "source": "https://github.com/sharkdp/fd",
+      "tool": "alias"
     },
     {
-      "id": "r24",
+      "id": "find-navigate-jump-by-remembered-name",
       "category": "Find & navigate",
-      "tool": "zoxide",
       "title": "Jump by remembered name",
       "command": "z your-app",
       "explanation": "zoxide learns visited directories. zi opens an interactive picker. Visit the directory with cd first if it is unknown.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://github.com/sharkdp/fd"
+      "source": "https://github.com/ajeetdsouza/zoxide",
+      "tool": "zoxide"
     },
     {
-      "id": "r25",
+      "id": "find-navigate-see-files-with-git-status",
       "category": "Find & navigate",
-      "tool": "eza",
       "title": "See files with Git status",
       "command": "eza -lah --git --icons=auto",
       "explanation": "A detailed directory listing. Your ll alias does the same with icons always enabled.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/eza-community/eza"
+      "source": "https://github.com/eza-community/eza",
+      "tool": "eza"
     },
     {
-      "id": "r26",
+      "id": "find-navigate-explore-a-small-tree",
       "category": "Find & navigate",
-      "tool": "eza",
       "title": "Explore a small tree",
       "command": "eza --tree --level=2 --git-ignore",
       "explanation": "Keep output shallow. --git-ignore removes entries ignored by Git.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/eza-community/eza"
+      "source": "https://github.com/eza-community/eza",
+      "tool": "eza"
     },
     {
-      "id": "r27",
+      "id": "find-navigate-find-files-by-name",
       "category": "Find & navigate",
-      "tool": "fd",
       "title": "Find files by name",
       "command": "fd -e ts -e tsx",
       "explanation": "fd respects ignore files by default. It searches names, while rg searches file contents.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/sharkdp/fd"
+      "source": "https://github.com/sharkdp/fd",
+      "tool": "fd"
     },
     {
-      "id": "r28",
+      "id": "find-navigate-find-hidden-config-files",
       "category": "Find & navigate",
-      "tool": "fd",
       "title": "Find hidden config files",
       "command": "fd --hidden --exclude .git '^\\.env'",
       "explanation": "Lists names only; avoids printing secrets stored inside environment files.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://github.com/sharkdp/fd"
+      "source": "https://github.com/sharkdp/fd",
+      "tool": "fd"
     },
     {
-      "id": "r29",
+      "id": "find-navigate-find-directories",
       "category": "Find & navigate",
-      "tool": "fd",
       "title": "Find directories",
       "command": "fd --type d 'components'",
       "explanation": "Narrow by type to locate component directories quickly.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/sharkdp/fd"
+      "source": "https://github.com/sharkdp/fd",
+      "tool": "fd"
     },
     {
-      "id": "r30",
+      "id": "find-navigate-find-text-in-source",
       "category": "Find & navigate",
-      "tool": "ripgrep",
       "title": "Find text in source",
       "command": "rg -n 'TODO|FIXME' -g '*.{ts,tsx,php,py}'",
       "explanation": "Show line numbers for matching source files. Quoting prevents the shell from interpreting the pattern.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/BurntSushi/ripgrep"
+      "source": "https://github.com/BurntSushi/ripgrep",
+      "tool": "ripgrep"
     },
     {
-      "id": "r31",
+      "id": "find-navigate-search-literal-punctuation",
       "category": "Find & navigate",
-      "tool": "ripgrep",
       "title": "Search literal punctuation",
       "command": "rg -n -F 'process.env.'",
       "explanation": "-F treats the pattern as literal text, rather than a regular expression.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/BurntSushi/ripgrep"
+      "source": "https://github.com/BurntSushi/ripgrep",
+      "tool": "ripgrep"
     },
     {
-      "id": "r32",
+      "id": "find-navigate-list-matching-files-only",
       "category": "Find & navigate",
-      "tool": "ripgrep",
       "title": "List matching files only",
       "command": "rg -l 'use client' -g '*.tsx'",
       "explanation": "Useful before opening files in your editor. -l prints each matching filename once.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://github.com/BurntSushi/ripgrep"
+      "source": "https://github.com/BurntSushi/ripgrep",
+      "tool": "ripgrep"
     },
     {
-      "id": "r33",
+      "id": "find-navigate-count-matches",
       "category": "Find & navigate",
-      "tool": "ripgrep",
       "title": "Count matches",
       "command": "rg -c 'TODO' -g '*.ts'",
       "explanation": "Counts matching lines per file. Use --count-matches to count individual matches instead.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://github.com/BurntSushi/ripgrep"
+      "source": "https://github.com/BurntSushi/ripgrep",
+      "tool": "ripgrep"
     },
     {
-      "id": "r34",
+      "id": "find-navigate-search-an-ignored-file-deliberately",
       "category": "Find & navigate",
-      "tool": "ripgrep",
       "title": "Search an ignored file deliberately",
       "command": "rg --no-ignore -n 'pattern' path/to/file",
       "explanation": "Replace the example path and pattern. Scope this tightly; searching every dependency is usually noise.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://github.com/BurntSushi/ripgrep"
+      "source": "https://github.com/BurntSushi/ripgrep",
+      "tool": "ripgrep"
     },
     {
-      "id": "r35",
+      "id": "find-navigate-choose-a-file-interactively",
       "category": "Find & navigate",
-      "tool": "fzf",
       "title": "Choose a file interactively",
       "command": "fzf",
       "explanation": "Your fd default feeds ignored-aware file names into fzf. Ctrl+T inserts a selected path into the current command.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/junegunn/fzf"
+      "source": "https://github.com/junegunn/fzf",
+      "tool": "fzf"
     },
     {
-      "id": "r36",
+      "id": "find-navigate-jump-with-a-directory-picker",
       "category": "Find & navigate",
-      "tool": "zoxide",
       "title": "Jump with a directory picker",
       "command": "zi",
       "explanation": "Interactive zoxide selector for directories you have already visited. Alt+C is fzf's directory picker.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://github.com/sharkdp/fd"
+      "source": "https://github.com/ajeetdsouza/zoxide",
+      "tool": "zoxide"
     },
     {
-      "id": "r37",
+      "id": "find-navigate-inspect-file-with-highlighting",
       "category": "Find & navigate",
-      "tool": "bat",
       "title": "Inspect file with highlighting",
       "command": "bat --paging=never package.json",
       "explanation": "bat adds highlighting. ccat is your alias; ordinary cat remains available for scripts.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/sharkdp/bat"
+      "source": "https://github.com/sharkdp/bat",
+      "tool": "bat"
     },
     {
-      "id": "r38",
+      "id": "find-navigate-read-just-part-of-a-file",
       "category": "Find & navigate",
-      "tool": "bat",
       "title": "Read just part of a file",
       "command": "bat --line-range 1:100 package.json",
       "explanation": "Useful when reviewing a large source file or config.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/sharkdp/bat"
+      "source": "https://github.com/sharkdp/bat",
+      "tool": "bat"
     },
     {
-      "id": "r39",
+      "id": "find-navigate-plain-portable-directory-tree",
       "category": "Find & navigate",
-      "tool": "tree",
       "title": "Plain portable directory tree",
       "command": "tree -L 2 -I 'node_modules|vendor|.git'",
       "explanation": "tree is also installed. The exclusion expression prevents huge dependency listings.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://oldmanprogrammer.net/source.php?dir=projects/tree"
+      "source": "https://oldmanprogrammer.net/source.php?dir=projects/tree",
+      "tool": "tree"
     },
     {
-      "id": "r40",
+      "id": "find-navigate-count-your-codebase",
       "category": "Find & navigate",
-      "tool": "tokei",
       "title": "Count your codebase",
       "command": "tokei . --exclude node_modules --exclude vendor",
       "explanation": "Shows source line counts by language. Size is a navigation aid, not a quality score.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://github.com/XAMPPRocky/tokei"
+      "source": "https://github.com/XAMPPRocky/tokei",
+      "tool": "tokei"
     },
     {
-      "id": "r41",
+      "id": "git-github-understand-current-changes",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Understand current changes",
       "command": "git status --short --branch",
       "explanation": "Your gss alias gives short status; gs gives the detailed version.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r42",
+      "id": "git-github-review-unstaged-changes",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Review unstaged changes",
       "command": "git diff",
       "explanation": "delta is already your configured pager. q exits; n and N navigate files when navigation is active.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r43",
+      "id": "git-github-review-what-will-be-committed",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Review what will be committed",
       "command": "git diff --staged",
       "explanation": "Always check staged content before committing. gds is your alias.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r44",
+      "id": "git-github-stage-only-intended-hunks",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Stage only intended hunks",
       "command": "git add -p",
       "explanation": "Review and select individual changes. Type ? at a hunk prompt for the available choices.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r45",
+      "id": "git-github-make-a-focused-commit",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Make a focused commit",
       "command": "git commit -m \"Explain the behavior changed\"",
       "explanation": "Commit the staged changes with a concrete message. Replace the example message.",
       "level": "Start",
       "effect": "Write",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r46",
+      "id": "git-github-start-a-feature-branch",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Start a feature branch",
       "command": "git switch -c feature/terminal-practice",
       "explanation": "Creates and switches to a branch. Choose a name appropriate to the actual change.",
       "level": "Start",
       "effect": "Write",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r47",
+      "id": "git-github-see-recent-history",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "See recent history",
       "command": "git log --oneline --graph --decorate -15",
       "explanation": "Your glog alias shows a similar graph. A compact history helps before a rebase or merge.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r48",
+      "id": "git-github-fetch-remote-changes",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Fetch remote changes",
       "command": "git fetch --prune",
       "explanation": "Updates remote-tracking refs and prunes stale ones. It does not merge into your working branch.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r49",
+      "id": "git-github-understand-upstream-differences",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Understand upstream differences",
       "command": "git log --oneline --left-right HEAD...@{upstream}",
       "explanation": "Requires a configured upstream. Left entries are local-only; right entries are upstream-only.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r50",
+      "id": "git-github-unstage-without-losing-edits",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Unstage without losing edits",
       "command": "git restore --staged path/to/file",
       "explanation": "Replace the example path. This changes the index and preserves working-tree content.",
       "level": "Start",
       "effect": "Write",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r51",
+      "id": "git-github-discard-a-file-s-local-edits",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Discard a file's local edits",
       "command": "git restore -- path/to/file",
       "explanation": "Replaces uncommitted working-tree content. Inspect git diff first; ordinary Git may not recover these edits.",
       "level": "Intermediate",
       "effect": "Destructive",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r52",
+      "id": "git-github-find-when-a-line-changed",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Find when a line changed",
       "command": "git blame -L 1,60 -- path/to/file",
       "explanation": "Replace the path. Follow up with git show COMMIT to understand the reason for a change.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r53",
+      "id": "git-github-search-the-history-of-a-string",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Search the history of a string",
       "command": "git log -S 'functionName' --oneline --all",
       "explanation": "Finds commits that change the number of occurrences of the string. Use -G for regex diff matching.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r54",
+      "id": "git-github-recover-a-moved-branch-tip",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Recover a moved branch tip",
       "command": "git reflog --date=relative -20",
       "explanation": "Read recent ref movements before trying recovery. Create a rescue branch from the desired commit.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r55",
+      "id": "git-github-create-a-parallel-checkout",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Create a parallel checkout",
       "command": "git worktree add ../project-review -b review/local",
       "explanation": "Adds a separate checkout and new branch without disturbing current work. Run inside the intended repo.",
       "level": "Advanced",
       "effect": "Write",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r56",
+      "id": "git-github-list-parallel-checkouts",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "List parallel checkouts",
       "command": "git worktree list",
       "explanation": "Useful when reviewing work while a development server runs in another checkout.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r57",
+      "id": "git-github-check-whitespace-errors",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Check whitespace errors",
       "command": "git diff --check",
       "explanation": "Detects whitespace problems and conflict markers in changes.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r58",
+      "id": "git-github-use-a-git-dashboard",
       "category": "Git & GitHub",
-      "tool": "lazygit",
       "title": "Use a Git dashboard",
       "command": "lazygit",
       "explanation": "Interactive status, hunk staging, history and branches. Read on-screen bindings before performing actions.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://github.com/jesseduffield/lazygit"
+      "source": "https://github.com/jesseduffield/lazygit",
+      "tool": "lazygit"
     },
     {
-      "id": "r59",
+      "id": "git-github-inspect-large-file-tracking",
       "category": "Git & GitHub",
-      "tool": "git",
       "title": "Inspect large-file tracking",
       "command": "git lfs ls-files",
       "explanation": "Lists files tracked by Git LFS. LFS stores pointers in Git and file content separately.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r60",
+      "id": "git-github-check-github-login",
       "category": "Git & GitHub",
-      "tool": "gh",
       "title": "Check GitHub login",
       "command": "gh auth status",
       "explanation": "Reports authentication status without requesting token output.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://cli.github.com/manual/"
+      "source": "https://cli.github.com/manual/",
+      "tool": "gh"
     },
     {
-      "id": "r61",
+      "id": "git-github-list-your-pull-requests",
       "category": "Git & GitHub",
-      "tool": "gh",
       "title": "List your pull requests",
       "command": "gh pr list --author @me",
       "explanation": "Run in the relevant GitHub repository.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://cli.github.com/manual/"
+      "source": "https://cli.github.com/manual/",
+      "tool": "gh"
     },
     {
-      "id": "r62",
+      "id": "git-github-review-a-pull-request-locally",
       "category": "Git & GitHub",
-      "tool": "gh",
       "title": "Review a pull request locally",
       "command": "gh pr diff 123",
       "explanation": "Replace 123 with a real PR number; prints its patch.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://cli.github.com/manual/"
+      "source": "https://cli.github.com/manual/",
+      "tool": "gh"
     },
     {
-      "id": "r63",
+      "id": "git-github-check-ci-for-a-pr",
       "category": "Git & GitHub",
-      "tool": "gh",
       "title": "Check CI for a PR",
       "command": "gh pr checks 123",
       "explanation": "Shows check status. Use gh run list to explore recent workflow runs.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://cli.github.com/manual/"
+      "source": "https://cli.github.com/manual/",
+      "tool": "gh"
     },
     {
-      "id": "r64",
+      "id": "git-github-inspect-failed-ci-logs",
       "category": "Git & GitHub",
-      "tool": "gh",
       "title": "Inspect failed CI logs",
       "command": "gh run view RUN_ID --log-failed",
       "explanation": "Replace RUN_ID with a real run ID from gh run list. Logs may contain sensitive project details.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://cli.github.com/manual/"
+      "source": "https://cli.github.com/manual/",
+      "tool": "gh"
     },
     {
-      "id": "r65",
+      "id": "git-github-create-a-draft-pr",
       "category": "Git & GitHub",
-      "tool": "gh",
       "title": "Create a draft PR",
       "command": "gh pr create --draft",
       "explanation": "Opens an interactive draft-PR flow and sends content to GitHub. Review title, body and target branch.",
       "level": "Intermediate",
       "effect": "Remote write",
-      "source": "https://cli.github.com/manual/"
+      "source": "https://cli.github.com/manual/",
+      "tool": "gh"
     },
     {
-      "id": "r66",
+      "id": "web-development-check-runtime-selection",
       "category": "Web development",
-      "tool": "volta",
       "title": "Check runtime selection",
       "command": "volta list",
       "explanation": "Shows the default Node and the tools Volta manages. Without Volta, use node --version and which -a node.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://docs.volta.sh/reference/"
+      "source": "https://docs.volta.sh/reference/",
+      "tool": "volta"
     },
     {
-      "id": "r67",
+      "id": "web-development-see-the-actual-node-binary",
       "category": "Web development",
-      "tool": "volta",
       "title": "See the actual Node binary",
       "command": "volta which node",
       "explanation": "Shows the executable Volta would select in the current project.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.volta.sh/reference/"
+      "source": "https://docs.volta.sh/reference/",
+      "tool": "volta"
     },
     {
-      "id": "r68",
+      "id": "web-development-list-project-scripts",
       "category": "Web development",
-      "tool": "pnpm",
       "title": "List project scripts",
       "command": "pnpm run",
       "explanation": "With no script, pnpm lists the scripts declared in package.json. Use this before assuming test or dev exists.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r69",
+      "id": "web-development-install-the-locked-dependencies",
       "category": "Web development",
-      "tool": "pnpm",
       "title": "Install the locked dependencies",
       "command": "pnpm install --frozen-lockfile",
       "explanation": "Run in a pnpm project with a current lockfile. Refuses changes to the lockfile; installs dependencies.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r70",
+      "id": "web-development-start-a-development-server",
       "category": "Web development",
-      "tool": "pnpm",
       "title": "Start a development server",
       "command": "cd ~/projects/your-app\npnpm dev",
       "explanation": "Starts the project's dev script. Databases and environment variables still need to be available. Ctrl+C stops it.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r71",
+      "id": "web-development-match-the-project-s-package-manager",
       "category": "Web development",
-      "tool": "ls",
       "title": "Match the project's package manager",
       "command": "ls pnpm-lock.yaml package-lock.json yarn.lock 2>/dev/null",
       "explanation": "The lockfile tells you which package manager the project uses. Mixing them produces inconsistent installs.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "ls"
     },
     {
-      "id": "r72",
+      "id": "web-development-check-types",
       "category": "Web development",
-      "tool": "pnpm",
       "title": "Check types",
       "command": "pnpm typecheck",
       "explanation": "Runs TypeScript without emitting JavaScript, if the project declares the script. pnpm run lists what exists.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r73",
+      "id": "web-development-lint-project-code",
       "category": "Web development",
-      "tool": "pnpm",
       "title": "Lint project code",
       "command": "pnpm lint",
       "explanation": "Runs the project's linter. Fix the underlying issue rather than suppressing the rule globally.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r74",
+      "id": "web-development-build-for-production",
       "category": "Web development",
-      "tool": "pnpm",
       "title": "Build for production",
       "command": "pnpm build",
       "explanation": "Runs the project's build, writing output such as .next. A build can require services and environment variables.",
       "level": "Intermediate",
       "effect": "Run",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r75",
+      "id": "web-development-run-unit-tests",
       "category": "Web development",
-      "tool": "pnpm",
       "title": "Run unit tests",
       "command": "pnpm test",
       "explanation": "Executes the project's test script. Read package.json to see which runner it uses.",
       "level": "Intermediate",
       "effect": "Run",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r76",
+      "id": "web-development-run-browser-tests",
       "category": "Web development",
-      "tool": "pnpm",
       "title": "Run browser tests",
       "command": "pnpm test:e2e",
       "explanation": "Runs end-to-end tests where the project declares them. Browsers, test data and a running server usually have to be set up first.",
       "level": "Intermediate",
       "effect": "Run",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r77",
+      "id": "web-development-explain-a-dependency",
       "category": "Web development",
-      "tool": "pnpm",
       "title": "Explain a dependency",
       "command": "pnpm why react",
       "explanation": "Find which dependency brings a package into the graph. Better than adding duplicate global packages.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r78",
+      "id": "web-development-inspect-direct-versions",
       "category": "Web development",
-      "tool": "pnpm",
       "title": "Inspect direct versions",
       "command": "pnpm list --depth 0",
       "explanation": "Lists top-level packages in the current project.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r79",
+      "id": "web-development-inspect-outdated-dependencies",
       "category": "Web development",
-      "tool": "pnpm",
       "title": "Inspect outdated dependencies",
       "command": "pnpm outdated",
       "explanation": "Read the available versions before choosing an upgrade. A nonzero exit can indicate outdated packages.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r80",
+      "id": "web-development-use-a-project-executable",
       "category": "Web development",
-      "tool": "pnpm",
       "title": "Use a project executable",
       "command": "pnpm exec tsc --noEmit",
       "explanation": "Runs the locally installed executable. It does not install a new CLI like pnpm dlx may do.",
       "level": "Intermediate",
       "effect": "Run",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r81",
+      "id": "web-development-pin-node-intentionally",
       "category": "Web development",
-      "tool": "volta",
       "title": "Pin Node intentionally",
       "command": "volta pin node@22",
       "explanation": "Writes a Volta pin into package.json so everyone on the project gets that Node. Agree on it with the repository first.",
       "level": "Advanced",
       "effect": "Write",
-      "source": "https://docs.volta.sh/reference/"
+      "source": "https://docs.volta.sh/reference/",
+      "tool": "volta"
     },
     {
-      "id": "r82",
+      "id": "web-development-run-any-declared-script",
       "category": "Web development",
-      "tool": "pnpm",
       "title": "Run any declared script",
       "command": "pnpm run build:types",
       "explanation": "Replace build:types with a script from pnpm run. Generated output is written into the project.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r83",
+      "id": "web-development-inspect-npm-globals",
       "category": "Web development",
-      "tool": "npm",
       "title": "Inspect npm globals",
       "command": "npm list -g --depth=0",
       "explanation": "A diagnostic inventory. Keep application dependencies in their projects.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.npmjs.com/cli/"
+      "source": "https://docs.npmjs.com/cli/",
+      "tool": "volta"
     },
     {
-      "id": "r84",
+      "id": "containers-wordpress-check-the-vm-macos",
       "category": "Containers & WordPress",
-      "tool": "colima",
       "title": "Check the VM (macOS)",
       "command": "colima status",
       "explanation": "On macOS, Docker needs a Linux VM. Colima reports its CPU, memory and mount settings. On Linux there is no VM: containers use the host kernel.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/abiosoft/colima"
+      "source": "https://github.com/abiosoft/colima",
+      "tool": "colima"
     },
     {
-      "id": "r85",
+      "id": "containers-wordpress-check-docker-s-destination",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Check Docker's destination",
       "command": "docker context show",
       "explanation": "Shows which engine your docker commands reach. A context name is not proof that anything is running.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://docs.docker.com/reference/cli/docker/"
+      "source": "https://docs.docker.com/reference/cli/docker/",
+      "tool": "docker"
     },
     {
-      "id": "r86",
+      "id": "containers-wordpress-list-docker-contexts",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "List Docker contexts",
       "command": "docker context ls",
       "explanation": "Verify the target before running commands, especially if remote contexts are added later.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.docker.com/reference/cli/docker/"
+      "source": "https://docs.docker.com/reference/cli/docker/",
+      "tool": "docker"
     },
     {
-      "id": "r87",
+      "id": "containers-wordpress-start-the-container-vm-macos",
       "category": "Containers & WordPress",
-      "tool": "colima",
       "title": "Start the container VM (macOS)",
       "command": "colima start",
       "explanation": "Starts the Colima profile. It does not start your project stacks. The Linux equivalent is sudo systemctl start docker.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://github.com/abiosoft/colima"
+      "source": "https://github.com/abiosoft/colima",
+      "tool": "colima"
     },
     {
-      "id": "r88",
+      "id": "containers-wordpress-stop-the-container-vm-macos",
       "category": "Containers & WordPress",
-      "tool": "colima",
       "title": "Stop the container VM (macOS)",
       "command": "colima stop",
       "explanation": "Stops every container in that VM. Useful when you want the memory back for something else; save running work first.",
       "level": "Intermediate",
       "effect": "Disruptive",
-      "source": "https://github.com/abiosoft/colima"
+      "source": "https://github.com/abiosoft/colima",
+      "tool": "colima"
     },
     {
-      "id": "r89",
+      "id": "containers-wordpress-list-running-containers",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "List running containers",
       "command": "docker ps",
       "explanation": "Add -a to include stopped containers. Nothing running is a valid result.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://docs.docker.com/reference/cli/docker/"
+      "source": "https://docs.docker.com/reference/cli/docker/",
+      "tool": "docker"
     },
     {
-      "id": "r90",
+      "id": "containers-wordpress-see-project-service-names",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "See project service names",
       "command": "docker compose config --services",
       "explanation": "Run from the compose directory. Unlike full config output, this does not print interpolated environment secrets.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://docs.docker.com/reference/cli/docker/"
+      "source": "https://docs.docker.com/reference/cli/docker/",
+      "tool": "docker"
     },
     {
-      "id": "r91",
+      "id": "containers-wordpress-validate-compose-config",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Validate Compose config",
       "command": "docker compose config --quiet",
       "explanation": "Checks the project's resolved configuration without printing it.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.docker.com/reference/cli/docker/"
+      "source": "https://docs.docker.com/reference/cli/docker/",
+      "tool": "docker"
     },
     {
-      "id": "r92",
+      "id": "containers-wordpress-start-a-wordpress-site",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Start a WordPress site",
       "command": "cd ~/projects/your-wordpress-site\ndocker compose up -d",
       "explanation": "Starts the project's services, downloading images and creating volumes if needed. The site's .env has to be configured first.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://docs.docker.com/reference/cli/docker/"
+      "source": "https://docs.docker.com/reference/cli/docker/",
+      "tool": "docker"
     },
     {
-      "id": "r93",
+      "id": "containers-wordpress-check-one-site-s-status",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Check one site's status",
       "command": "docker compose ps",
       "explanation": "Run from that site's directory.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://docs.docker.com/reference/cli/docker/"
+      "source": "https://docs.docker.com/reference/cli/docker/",
+      "tool": "docker"
     },
     {
-      "id": "r94",
+      "id": "containers-wordpress-follow-recent-site-logs",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Follow recent site logs",
       "command": "docker compose logs --tail=100 -f wordpress",
       "explanation": "Ctrl+C leaves the log stream without stopping the containers. Logs can contain request details.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://docs.docker.com/reference/cli/docker/"
+      "source": "https://docs.docker.com/reference/cli/docker/",
+      "tool": "docker"
     },
     {
-      "id": "r95",
+      "id": "containers-wordpress-check-wordpress-plugins",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Check WordPress plugins",
       "command": "docker compose exec wpcli wp plugin list",
       "explanation": "Assumes the stack defines a wpcli service. Running WP-CLI in the container keeps the PHP and WordPress versions aligned with the site.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://developer.wordpress.org/cli/commands/"
+      "source": "https://developer.wordpress.org/cli/commands/",
+      "tool": "wp"
     },
     {
-      "id": "r96",
+      "id": "containers-wordpress-check-wordpress-core",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Check WordPress core",
       "command": "docker compose exec wpcli wp core version",
       "explanation": "Runs in the matching container environment, avoiding global PHP-version drift.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://developer.wordpress.org/cli/commands/"
+      "source": "https://developer.wordpress.org/cli/commands/",
+      "tool": "wp"
     },
     {
-      "id": "r97",
+      "id": "containers-wordpress-list-wordpress-options-selectively",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "List WordPress options selectively",
       "command": "docker compose exec wpcli wp option get siteurl",
       "explanation": "Query one known option; avoid dumping all options, which can contain secrets.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://developer.wordpress.org/cli/commands/"
+      "source": "https://developer.wordpress.org/cli/commands/",
+      "tool": "wp"
     },
     {
-      "id": "r98",
+      "id": "containers-wordpress-preview-a-url-migration",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Preview a URL migration",
       "command": "docker compose exec wpcli wp search-replace 'https://old.example' 'https://new.example' --all-tables-with-prefix --skip-columns=guid --dry-run",
       "explanation": "Replace the example URLs. Keep --dry-run until you have reviewed the result and backed up the database.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://developer.wordpress.org/cli/commands/"
+      "source": "https://developer.wordpress.org/cli/commands/",
+      "tool": "wp"
     },
     {
-      "id": "r99",
+      "id": "containers-wordpress-export-a-wordpress-database",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Export a WordPress database",
       "command": "docker compose exec wpcli wp db export db-seed/manual-backup.sql",
       "explanation": "Writes a potentially sensitive SQL backup to the mounted db-seed directory. Choose a new filename and keep it out of Git.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://developer.wordpress.org/cli/commands/"
+      "source": "https://developer.wordpress.org/cli/commands/",
+      "tool": "wp"
     },
     {
-      "id": "r100",
+      "id": "containers-wordpress-stop-a-project-keep-its-data",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Stop a project, keep its data",
       "command": "docker compose stop",
       "explanation": "Stops containers without removing them or volumes. up -d starts them again.",
       "level": "Start",
       "effect": "Disruptive",
-      "source": "https://docs.docker.com/reference/cli/docker/"
+      "source": "https://docs.docker.com/reference/cli/docker/",
+      "tool": "docker"
     },
     {
-      "id": "r101",
+      "id": "containers-wordpress-remove-stopped-project-containers",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Remove stopped project containers",
       "command": "docker compose down",
       "explanation": "Removes project containers and networks. Do not add --volumes unless deliberately deleting database volumes.",
       "level": "Intermediate",
       "effect": "Disruptive",
-      "source": "https://docs.docker.com/reference/cli/docker/"
+      "source": "https://docs.docker.com/reference/cli/docker/",
+      "tool": "docker"
     },
     {
-      "id": "r102",
+      "id": "containers-wordpress-inspect-docker-disk-use",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Inspect Docker disk use",
       "command": "docker system df -v",
       "explanation": "Reports images, containers, volumes and cache. Reclaimable volumes may still hold important databases.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.docker.com/reference/cli/docker/"
+      "source": "https://docs.docker.com/reference/cli/docker/",
+      "tool": "docker"
     },
     {
-      "id": "r103",
+      "id": "containers-wordpress-inspect-live-container-resources",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Inspect live container resources",
       "command": "docker stats --no-stream",
       "explanation": "Takes a single CPU/memory snapshot of running containers.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.docker.com/reference/cli/docker/"
+      "source": "https://docs.docker.com/reference/cli/docker/",
+      "tool": "docker"
     },
     {
-      "id": "r104",
+      "id": "containers-wordpress-inspect-image-layers",
       "category": "Containers & WordPress",
-      "tool": "dive",
       "title": "Inspect image layers",
       "command": "dive IMAGE:TAG",
       "explanation": "Replace IMAGE:TAG with an image listed by docker image ls. Helps find oversized layers.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://github.com/wagoodman/dive"
+      "source": "https://github.com/wagoodman/dive",
+      "tool": "dive"
     },
     {
-      "id": "r105",
+      "id": "containers-wordpress-lint-a-dockerfile",
       "category": "Containers & WordPress",
-      "tool": "hadolint",
       "title": "Lint a Dockerfile",
       "command": "hadolint Dockerfile",
       "explanation": "Runs the installed Dockerfile linter on the local file.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://github.com/hadolint/hadolint"
+      "source": "https://github.com/hadolint/hadolint",
+      "tool": "hadolint"
     },
     {
-      "id": "r106",
+      "id": "containers-wordpress-inspect-the-build-engine",
       "category": "Containers & WordPress",
-      "tool": "docker",
       "title": "Inspect the build engine",
       "command": "docker buildx ls",
       "explanation": "Lists builders and platforms before a multi-platform build.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.docker.com/reference/cli/docker/"
+      "source": "https://docs.docker.com/reference/cli/docker/",
+      "tool": "docker"
     },
     {
-      "id": "r107",
+      "id": "containers-wordpress-docker-dashboard",
       "category": "Containers & WordPress",
-      "tool": "lazydocker",
       "title": "Docker dashboard",
       "command": "lazydocker",
       "explanation": "Interactive container/log/resource UI. It includes actions that can stop or remove workloads.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://github.com/jesseduffield/lazydocker"
+      "source": "https://github.com/jesseduffield/lazydocker",
+      "tool": "lazydocker"
     },
     {
-      "id": "r108",
+      "id": "containers-wordpress-inspect-kubernetes-context",
       "category": "Containers & WordPress",
-      "tool": "kubernetes-cli",
       "title": "Inspect Kubernetes context",
       "command": "kubectl config current-context",
       "explanation": "Tells you which cluster the next kubectl command would hit. An error here usually means no kubeconfig, not a broken install.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://kubernetes.io/docs/reference/kubectl/"
+      "source": "https://kubernetes.io/docs/reference/kubectl/",
+      "tool": "kubernetes-cli"
     },
     {
-      "id": "r109",
+      "id": "containers-wordpress-inspect-kubernetes-workloads",
       "category": "Containers & WordPress",
-      "tool": "kubernetes-cli",
       "title": "Inspect Kubernetes workloads",
       "command": "kubectl get pods -A",
       "explanation": "Contacts the active cluster and lists pods in every namespace. Check the context before you run it.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://kubernetes.io/docs/reference/kubectl/"
+      "source": "https://kubernetes.io/docs/reference/kubectl/",
+      "tool": "kubernetes-cli"
     },
     {
-      "id": "r110",
+      "id": "containers-wordpress-list-helm-releases",
       "category": "Containers & WordPress",
-      "tool": "helm",
       "title": "List Helm releases",
       "command": "helm list --all-namespaces",
       "explanation": "Read-only cluster query; requires a configured reachable Kubernetes cluster.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://helm.sh/docs/"
+      "source": "https://helm.sh/docs/",
+      "tool": "helm"
     },
     {
-      "id": "r111",
+      "id": "containers-wordpress-kubernetes-dashboard",
       "category": "Containers & WordPress",
-      "tool": "k9s",
       "title": "Kubernetes dashboard",
       "command": "k9s --readonly",
       "explanation": "Opens the read-only dashboard for the selected context.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://k9scli.io/"
+      "source": "https://k9scli.io/",
+      "tool": "k9s"
     },
     {
-      "id": "r112",
+      "id": "python-local-ai-list-installed-python-runtimes",
       "category": "Python & local AI",
-      "tool": "uv",
       "title": "List installed Python runtimes",
       "command": "uv python list --only-installed",
       "explanation": "A machine usually has several Pythons: the system one, a package-manager one and uv's. They are not interchangeable.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://docs.astral.sh/uv/reference/cli/"
+      "source": "https://docs.astral.sh/uv/reference/cli/",
+      "tool": "uv"
     },
     {
-      "id": "r113",
+      "id": "python-local-ai-list-isolated-python-tools",
       "category": "Python & local AI",
-      "tool": "uv",
       "title": "List isolated Python tools",
       "command": "uv tool list",
       "explanation": "Tools installed with uv tool install each get their own environment, so a CLI cannot break your projects.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://docs.astral.sh/uv/reference/cli/"
+      "source": "https://docs.astral.sh/uv/reference/cli/",
+      "tool": "uv"
     },
     {
-      "id": "r114",
+      "id": "python-local-ai-use-a-project-s-environment",
       "category": "Python & local AI",
-      "tool": "uv",
       "title": "Use a project's environment",
       "command": "uv run python --version",
       "explanation": "In a uv project, respects the project's environment and Python requirements; may create or sync the environment.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://docs.astral.sh/uv/reference/cli/"
+      "source": "https://docs.astral.sh/uv/reference/cli/",
+      "tool": "uv"
     },
     {
-      "id": "r115",
+      "id": "python-local-ai-create-a-virtual-environment",
       "category": "Python & local AI",
-      "tool": "uv",
       "title": "Create a virtual environment",
       "command": "uv venv --python 3.12 .venv",
       "explanation": "Creates .venv in the current directory. uv downloads that Python version if it is missing.",
       "level": "Start",
       "effect": "Write",
-      "source": "https://docs.astral.sh/uv/reference/cli/"
+      "source": "https://docs.astral.sh/uv/reference/cli/",
+      "tool": "uv"
     },
     {
-      "id": "r116",
+      "id": "python-local-ai-activate-a-virtual-environment",
       "category": "Python & local AI",
-      "tool": "source",
       "title": "Activate a virtual environment",
       "command": "source .venv/bin/activate",
       "explanation": "Run deactivate to leave. uv run avoids needing this at all, which is usually the better habit.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://docs.astral.sh/uv/"
+      "source": "https://docs.astral.sh/uv/",
+      "tool": "source"
     },
     {
-      "id": "r117",
+      "id": "python-local-ai-sync-a-uv-project",
       "category": "Python & local AI",
-      "tool": "uv",
       "title": "Sync a uv project",
       "command": "uv sync --locked",
       "explanation": "Uses the existing lockfile and fails if it needs updating. Run only in a uv project.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://docs.astral.sh/uv/reference/cli/"
+      "source": "https://docs.astral.sh/uv/reference/cli/",
+      "tool": "uv"
     },
     {
-      "id": "r118",
+      "id": "python-local-ai-run-a-python-script",
       "category": "Python & local AI",
-      "tool": "uv",
       "title": "Run a Python script",
       "command": "uv run python script.py",
       "explanation": "Replace script.py with your actual script. Dependencies belong in the project.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://docs.astral.sh/uv/reference/cli/"
+      "source": "https://docs.astral.sh/uv/reference/cli/",
+      "tool": "uv"
     },
     {
-      "id": "r119",
+      "id": "python-local-ai-inspect-dependency-relationships",
       "category": "Python & local AI",
-      "tool": "uv",
       "title": "Inspect dependency relationships",
       "command": "uv tree",
       "explanation": "Prints the current project's dependency graph.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.astral.sh/uv/reference/cli/"
+      "source": "https://docs.astral.sh/uv/reference/cli/",
+      "tool": "uv"
     },
     {
-      "id": "r120",
+      "id": "python-local-ai-add-a-declared-dependency",
       "category": "Python & local AI",
-      "tool": "uv",
       "title": "Add a declared dependency",
       "command": "uv add httpx",
       "explanation": "Changes pyproject.toml, lockfile and environment. Use only when your project needs this dependency.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://docs.astral.sh/uv/reference/cli/"
+      "source": "https://docs.astral.sh/uv/reference/cli/",
+      "tool": "uv"
     },
     {
-      "id": "r121",
+      "id": "python-local-ai-find-the-python-interpreter",
       "category": "Python & local AI",
-      "tool": "python3",
       "title": "Find the Python interpreter",
       "command": "python3 -c 'import sys; print(sys.executable); print(sys.version)'",
       "explanation": "Use uv run python for the project-specific interpreter rather than assuming global python3 is the correct one.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.python.org/3/using/cmdline.html"
+      "source": "https://docs.python.org/3/using/cmdline.html",
+      "tool": "python3"
     },
     {
-      "id": "r122",
+      "id": "python-local-ai-find-the-uv-cache",
       "category": "Python & local AI",
-      "tool": "uv",
       "title": "Find the uv cache",
       "command": "uv cache dir",
       "explanation": "Inspect before cleaning. uv cache prune is a separate mutation and cache cleanup means future downloads.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.astral.sh/uv/reference/cli/"
+      "source": "https://docs.astral.sh/uv/reference/cli/",
+      "tool": "uv"
     },
     {
-      "id": "r123",
+      "id": "python-local-ai-list-local-ollama-models",
       "category": "Python & local AI",
-      "tool": "ollama",
       "title": "List local Ollama models",
       "command": "ollama list",
       "explanation": "Shows downloaded models and their size on disk. Disk size is a rough floor for memory use, not a promise.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://ollama.com/"
+      "source": "https://ollama.com/",
+      "tool": "ollama"
     },
     {
-      "id": "r124",
+      "id": "python-local-ai-see-loaded-ai-models",
       "category": "Python & local AI",
-      "tool": "ollama",
       "title": "See loaded AI models",
       "command": "ollama ps",
       "explanation": "Shows models currently in memory. An empty list means the service is idle, not that Ollama is missing.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://ollama.com/"
+      "source": "https://ollama.com/",
+      "tool": "ollama"
     },
     {
-      "id": "r125",
+      "id": "python-local-ai-run-a-model",
       "category": "Python & local AI",
-      "tool": "ollama",
       "title": "Run a model",
       "command": "ollama run llama3.1:8b",
       "explanation": "Downloads the model on first use, then loads it into memory. Stop containers and other heavy work first on a small machine. /bye exits the chat.",
       "level": "Intermediate",
       "effect": "Run",
-      "source": "https://ollama.com/"
+      "source": "https://ollama.com/",
+      "tool": "ollama"
     },
     {
-      "id": "r126",
+      "id": "python-local-ai-release-a-loaded-model",
       "category": "Python & local AI",
-      "tool": "ollama",
       "title": "Release a loaded model",
       "command": "ollama stop llama3.1:8b",
       "explanation": "Unloads the model from memory. It does not delete the downloaded files.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://ollama.com/"
+      "source": "https://ollama.com/",
+      "tool": "ollama"
     },
     {
-      "id": "r127",
+      "id": "python-local-ai-inspect-model-metadata",
       "category": "Python & local AI",
-      "tool": "ollama",
       "title": "Inspect model metadata",
       "command": "ollama show llama3.1:8b",
       "explanation": "Read the architecture, parameter count and context length before choosing settings.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://ollama.com/"
+      "source": "https://ollama.com/",
+      "tool": "ollama"
     },
     {
-      "id": "r128",
+      "id": "python-local-ai-inspect-llama-cpp-options",
       "category": "Python & local AI",
-      "tool": "llama-cli",
       "title": "Inspect llama.cpp options",
       "command": "llama-cli --help",
       "explanation": "Runs GGUF models directly, without a model manager. Start with conservative context sizes.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://github.com/ggml-org/llama.cpp"
+      "source": "https://github.com/ggml-org/llama.cpp",
+      "tool": "llama.cpp"
     },
     {
-      "id": "r129",
+      "id": "python-local-ai-run-a-local-gguf-model",
       "category": "Python & local AI",
-      "tool": "llama-cli",
       "title": "Run a local GGUF model",
       "command": "llama-cli -m /path/to/model.gguf -p 'Explain this project' -n 128 -c 2048",
       "explanation": "Replace the file path. Context size and GPU offload settings decide how much memory this takes.",
       "level": "Advanced",
       "effect": "Run",
-      "source": "https://github.com/ggml-org/llama.cpp"
+      "source": "https://github.com/ggml-org/llama.cpp",
+      "tool": "llama.cpp"
     },
     {
-      "id": "r130",
+      "id": "data-files-media-read-a-json-field",
       "category": "Data, files & media",
-      "tool": "jq",
       "title": "Read a JSON field",
       "command": "jq '.scripts' package.json",
       "explanation": "Print just the scripts object. jq is for structured data; rg is for textual searching.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://jqlang.github.io/jq/manual/"
+      "source": "https://jqlang.github.io/jq/manual/",
+      "tool": "jq"
     },
     {
-      "id": "r131",
+      "id": "data-files-media-get-raw-json-text",
       "category": "Data, files & media",
-      "tool": "jq",
       "title": "Get raw JSON text",
       "command": "jq -r '.name' package.json",
       "explanation": "-r outputs the string without JSON quotation marks.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://jqlang.github.io/jq/manual/"
+      "source": "https://jqlang.github.io/jq/manual/",
+      "tool": "jq"
     },
     {
-      "id": "r132",
+      "id": "data-files-media-validate-json",
       "category": "Data, files & media",
-      "tool": "jq",
       "title": "Validate JSON",
       "command": "jq empty package.json",
       "explanation": "A successful exit confirms valid JSON; it does not validate an application-specific schema.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://jqlang.github.io/jq/manual/"
+      "source": "https://jqlang.github.io/jq/manual/",
+      "tool": "jq"
     },
     {
-      "id": "r133",
+      "id": "data-files-media-browse-large-json-interactively",
       "category": "Data, files & media",
-      "tool": "jless",
       "title": "Browse large JSON interactively",
       "command": "jless package.json",
       "explanation": "Navigate structured data without printing a giant document. q quits.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://jless.io/"
+      "source": "https://jless.io/",
+      "tool": "jless"
     },
     {
-      "id": "r134",
+      "id": "data-files-media-read-compose-service-names-from-yaml",
       "category": "Data, files & media",
-      "tool": "yq",
       "title": "Read Compose service names from YAML",
       "command": "yq '.services | keys' docker-compose.yml",
       "explanation": "Reads the raw YAML without Compose's variable interpolation. This is Mike Farah's Go yq, not the Python one.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://mikefarah.gitbook.io/yq/"
+      "source": "https://mikefarah.gitbook.io/yq/",
+      "tool": "yq"
     },
     {
-      "id": "r135",
+      "id": "data-files-media-read-markdown-nicely",
       "category": "Data, files & media",
-      "tool": "glow",
       "title": "Read Markdown nicely",
       "command": "glow README.md",
       "explanation": "Renders Markdown in the terminal. Helpful for project instructions.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/charmbracelet/glow"
+      "source": "https://github.com/charmbracelet/glow",
+      "tool": "glow"
     },
     {
-      "id": "r136",
+      "id": "data-files-media-preview-a-text-substitution",
       "category": "Data, files & media",
-      "tool": "printf",
       "title": "Preview a text substitution",
       "command": "printf '%s\\n' 'old-name' | sd 'old-name' 'new-name'",
-      "explanation": "Transform piped text first to preview the result. Passing a filename to sd instead edits that file in place.",
+      "explanation": "Transform piped text first to see the result. Passing a filename to sd instead edits that file in place, with no undo.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://jqlang.org/manual/"
+      "source": "https://jqlang.org/manual/",
+      "tool": "printf"
     },
     {
-      "id": "r137",
+      "id": "data-files-media-edit-a-known-string-in-one-file",
       "category": "Data, files & media",
-      "tool": "sd",
       "title": "Edit a known string in one file",
       "command": "sd 'old-name' 'new-name' path/to/file",
       "explanation": "Replace placeholders; edits in place. Review git diff afterwards and use a narrow path.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://github.com/chmln/sd"
+      "source": "https://github.com/chmln/sd",
+      "tool": "sd"
     },
     {
-      "id": "r138",
+      "id": "data-files-media-watch-files-and-rerun-tests",
       "category": "Data, files & media",
-      "tool": "watchexec",
       "title": "Watch files and rerun tests",
       "command": "watchexec -e py -- uv run pytest",
       "explanation": "Runs tests after Python files change. Requires pytest in that project. Ctrl+C stops the watcher.",
       "level": "Intermediate",
       "effect": "Run",
-      "source": "https://github.com/watchexec/watchexec"
+      "source": "https://github.com/watchexec/watchexec",
+      "tool": "watchexec"
     },
     {
-      "id": "r139",
+      "id": "data-files-media-benchmark-two-read-only-commands",
       "category": "Data, files & media",
-      "tool": "hyperfine",
       "title": "Benchmark two read-only commands",
       "command": "hyperfine --warmup 2 'rg TODO . -g *.ts' 'rg -F TODO . -g *.ts'",
       "explanation": "Example comparison of regex vs literal search. Run in a suitable repo; benchmark commands execute repeatedly.",
       "level": "Advanced",
       "effect": "Run",
-      "source": "https://github.com/sharkdp/hyperfine"
+      "source": "https://github.com/sharkdp/hyperfine",
+      "tool": "hyperfine"
     },
     {
-      "id": "r140",
+      "id": "data-files-media-move-a-file-to-trash",
       "category": "Data, files & media",
-      "tool": "trash",
       "title": "Move a file to Trash",
       "command": "trash ./unwanted-file.txt",
       "explanation": "Sends the file to the desktop Trash instead of unlinking it, so you can get it back. On Linux the trash-cli command is usually trash-put.",
       "level": "Start",
       "effect": "Write",
-      "source": "https://github.com/sindresorhus/trash-cli"
+      "source": "https://github.com/sindresorhus/trash-cli",
+      "tool": "trash"
     },
     {
-      "id": "r141",
+      "id": "data-files-media-inspect-an-archive-before-extraction",
       "category": "Data, files & media",
-      "tool": "bsdtar",
       "title": "Inspect an archive before extraction",
       "command": "bsdtar -tf archive.7z",
       "explanation": "libarchive's bsdtar reads zip, 7z, rar and more. Always read the filenames before extracting.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://jqlang.org/manual/"
+      "source": "https://jqlang.org/manual/",
+      "tool": "bsdtar"
     },
     {
-      "id": "r142",
+      "id": "data-files-media-extract-into-a-fresh-folder",
       "category": "Data, files & media",
-      "tool": "bsdtar",
       "title": "Extract into a fresh folder",
       "command": "mkdir -p extracted\nbsdtar -xf archive.7z -C extracted",
       "explanation": "Extracting into an empty directory stops a badly built archive from scattering files over your working directory.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://jqlang.org/manual/"
+      "source": "https://jqlang.org/manual/",
+      "tool": "bsdtar"
     },
     {
-      "id": "r143",
+      "id": "data-files-media-inspect-image-dimensions",
       "category": "Data, files & media",
-      "tool": "imagemagick",
       "title": "Inspect image dimensions",
       "command": "magick identify image.png",
       "explanation": "Reports format, dimensions and colour depth without modifying the file.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://imagemagick.org/script/command-line-processing.php"
+      "source": "https://imagemagick.org/script/command-line-processing.php",
+      "tool": "imagemagick"
     },
     {
-      "id": "r144",
+      "id": "data-files-media-make-a-web-sized-image",
       "category": "Data, files & media",
-      "tool": "imagemagick",
       "title": "Make a web-sized image",
       "command": "magick input.jpg -auto-orient -resize '1600x1600>' -strip output.webp",
       "explanation": "Creates a new WebP and removes metadata. The > prevents upscaling. Keep the original file.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://imagemagick.org/script/command-line-processing.php"
+      "source": "https://imagemagick.org/script/command-line-processing.php",
+      "tool": "imagemagick"
     },
     {
-      "id": "r145",
+      "id": "data-files-media-extract-text-from-an-image",
       "category": "Data, files & media",
-      "tool": "tesseract",
       "title": "Extract text from an image",
       "command": "tesseract screenshot.png stdout",
       "explanation": "Runs OCR locally, with no upload. Non-English text needs that language's data package installed.",
       "level": "Intermediate",
       "effect": "Run",
-      "source": "https://tesseract-ocr.github.io/"
+      "source": "https://tesseract-ocr.github.io/",
+      "tool": "tesseract"
     },
     {
-      "id": "r146",
+      "id": "data-files-media-list-ocr-languages",
       "category": "Data, files & media",
-      "tool": "tesseract",
       "title": "List OCR languages",
       "command": "tesseract --list-langs",
       "explanation": "Check what is installed before assuming a language works. Each one is a separate package.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://tesseract-ocr.github.io/"
+      "source": "https://tesseract-ocr.github.io/",
+      "tool": "tesseract"
     },
     {
-      "id": "r147",
+      "id": "data-files-media-reach-a-command-an-alias-is-shadowing",
       "category": "Data, files & media",
-      "tool": "command",
       "title": "Reach a command an alias is shadowing",
       "command": "command gs --version",
       "explanation": "If gs is an alias for git status, command skips the alias and runs the real executable. whence -va gs shows both.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://jqlang.org/manual/"
+      "source": "https://www.ghostscript.com/documentation/",
+      "tool": "ghostscript"
     },
     {
-      "id": "r148",
+      "id": "data-files-media-hash-a-downloaded-file",
       "category": "Data, files & media",
-      "tool": "shasum",
       "title": "Hash a downloaded file",
       "command": "shasum -a 256 download.tar.gz",
       "explanation": "Compare with the publisher's checksum through a trusted channel. The hash alone does not prove provenance.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://jqlang.org/manual/"
+      "source": "https://jqlang.org/manual/",
+      "tool": "shasum"
     },
     {
-      "id": "r149",
+      "id": "data-files-media-inspect-a-sqlite-database-read-only",
       "category": "Data, files & media",
-      "tool": "sqlite3",
       "title": "Inspect a SQLite database read-only",
       "command": "sqlite3 -readonly database.sqlite '.tables'",
       "explanation": "Replace the file path. Read-only mode prevents accidental database writes.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://jqlang.org/manual/"
+      "source": "https://jqlang.org/manual/",
+      "tool": "sqlite3"
     },
     {
-      "id": "r150",
+      "id": "data-files-media-show-sqlite-schema",
       "category": "Data, files & media",
-      "tool": "sqlite3",
       "title": "Show SQLite schema",
       "command": "sqlite3 -readonly database.sqlite '.schema'",
       "explanation": "Read structure before querying. Do not point this at an unknown production database file.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://jqlang.org/manual/"
+      "source": "https://jqlang.org/manual/",
+      "tool": "sqlite3"
     },
     {
-      "id": "r151",
+      "id": "data-files-media-check-native-build-tools",
       "category": "Data, files & media",
-      "tool": "cmake",
       "title": "Check native build tools",
       "command": "cmake --version",
       "explanation": "Many tools compile from source when there is no binary for your platform. Keep build output in a per-project directory.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://jqlang.org/manual/"
+      "source": "https://jqlang.org/manual/",
+      "tool": "cmake"
     },
     {
-      "id": "r152",
+      "id": "data-files-media-find-a-native-library-s-flags",
       "category": "Data, files & media",
-      "tool": "pkg-config",
       "title": "Find a native library's flags",
       "command": "pkg-config --cflags --libs libpng",
       "explanation": "Returns the compiler and linker flags for an installed library. pkgconf provides the pkg-config command on most systems.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://jqlang.org/manual/"
+      "source": "https://jqlang.org/manual/",
+      "tool": "pkg-config"
     },
     {
-      "id": "r153",
+      "id": "data-files-media-check-a-go-project",
       "category": "Data, files & media",
-      "tool": "go",
       "title": "Check a Go project",
       "command": "go test ./...",
       "explanation": "Run in a Go module. Tests may execute arbitrary project code and access configured resources.",
       "level": "Intermediate",
       "effect": "Run",
-      "source": "https://go.dev/doc/"
+      "source": "https://go.dev/doc/",
+      "tool": "go"
     },
     {
-      "id": "r154",
+      "id": "data-files-media-inspect-go-environment-paths",
       "category": "Data, files & media",
-      "tool": "go",
       "title": "Inspect Go environment paths",
       "command": "go env GOPATH GOMOD GOROOT",
       "explanation": "Select only needed fields instead of dumping all environment variables.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://go.dev/doc/"
+      "source": "https://go.dev/doc/",
+      "tool": "go"
     },
     {
-      "id": "r155",
+      "id": "data-files-media-check-a-language-server",
       "category": "Data, files & media",
-      "tool": "gopls",
       "title": "Check a language server",
       "command": "gopls version",
       "explanation": "Language servers power editor completion and diagnostics. They normally run through the editor, not by hand.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://jqlang.org/manual/"
+      "source": "https://jqlang.org/manual/",
+      "tool": "gopls"
     },
     {
-      "id": "r156",
+      "id": "data-files-media-inspect-a-tree-sitter-grammar",
       "category": "Data, files & media",
-      "tool": "tree-sitter",
       "title": "Inspect a tree-sitter grammar",
       "command": "tree-sitter --help",
       "explanation": "Parser tooling behind modern syntax highlighting. The library and the CLI are separate packages.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://jqlang.org/manual/"
+      "source": "https://jqlang.org/manual/",
+      "tool": "tree-sitter"
     },
     {
-      "id": "r157",
+      "id": "networking-processes-check-http-headers",
       "category": "Networking & processes",
-      "tool": "curl",
       "title": "Check HTTP headers",
       "command": "curl -I https://example.com",
       "explanation": "Sends a HEAD request. Useful for redirects, caching and content type without downloading the page body.",
       "level": "Start",
       "effect": "Network",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "curl"
     },
     {
-      "id": "r158",
+      "id": "networking-processes-inspect-a-local-web-app",
       "category": "Networking & processes",
-      "tool": "curl",
       "title": "Inspect a local web app",
       "command": "curl -sS -o /dev/null -w '%{http_code}\\n' http://localhost:3000",
       "explanation": "Prints the HTTP status code. It fails if no service is listening.",
       "level": "Intermediate",
       "effect": "Network",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "curl"
     },
     {
-      "id": "r159",
+      "id": "networking-processes-read-a-local-json-api",
       "category": "Networking & processes",
-      "tool": "xh",
       "title": "Read a local JSON API",
       "command": "xh GET http://localhost:3000/api/health",
       "explanation": "Friendly HTTP client. Replace with an endpoint your application actually implements.",
       "level": "Start",
       "effect": "Network",
-      "source": "https://github.com/ducaale/xh"
+      "source": "https://github.com/ducaale/xh",
+      "tool": "xh"
     },
     {
-      "id": "r160",
+      "id": "networking-processes-download-to-an-explicit-file",
       "category": "Networking & processes",
-      "tool": "curl",
       "title": "Download to an explicit file",
       "command": "curl --fail --location --output download.zip https://example.com/download.zip",
       "explanation": "Example URL must be replaced. --fail makes HTTP errors fail the command; --location follows redirects.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "curl"
     },
     {
-      "id": "r161",
+      "id": "networking-processes-continue-an-interrupted-download",
       "category": "Networking & processes",
-      "tool": "wget",
       "title": "Continue an interrupted download",
       "command": "wget -c https://example.com/large-file.zip",
       "explanation": "Replace the URL. Resumes if the server supports it and writes into the current directory.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://www.gnu.org/software/wget/manual/"
+      "source": "https://www.gnu.org/software/wget/manual/",
+      "tool": "wget"
     },
     {
-      "id": "r162",
+      "id": "networking-processes-find-a-port-listener",
       "category": "Networking & processes",
-      "tool": "lsof",
       "title": "Find a port listener",
       "command": "lsof -nP -iTCP:3000 -sTCP:LISTEN",
       "explanation": "Identify the process holding a port before stopping anything. On Linux, ss -tlnp answers the same question.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/lsof-org/lsof"
+      "source": "https://github.com/lsof-org/lsof",
+      "tool": "lsof"
     },
     {
-      "id": "r163",
+      "id": "networking-processes-see-all-listening-tcp-ports",
       "category": "Networking & processes",
-      "tool": "lsof",
       "title": "See all listening TCP ports",
       "command": "lsof -nP -iTCP -sTCP:LISTEN",
       "explanation": "-nP skips DNS and service-name lookups, so the output is fast and literal.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/lsof-org/lsof"
+      "source": "https://github.com/lsof-org/lsof",
+      "tool": "lsof"
     },
     {
-      "id": "r164",
+      "id": "networking-processes-stop-a-stuck-local-dev-server",
       "category": "Networking & processes",
-      "tool": "kill",
       "title": "Stop a stuck local dev server",
       "command": "kill $(lsof -nP -iTCP:3000 -sTCP:LISTEN -t)",
       "explanation": "Sends SIGTERM to every listener on that port. Try Ctrl+C in the owning terminal first; this discards unsaved work in that process.",
       "level": "Intermediate",
       "effect": "Disruptive",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "kill"
     },
     {
-      "id": "r165",
+      "id": "networking-processes-look-up-dns",
       "category": "Networking & processes",
-      "tool": "dig",
       "title": "Look up DNS",
       "command": "dig example.com",
       "explanation": "Shows DNS answers, not an HTTP response. Useful when the browser cannot find a host.",
       "level": "Intermediate",
       "effect": "Network",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "dig"
     },
     {
-      "id": "r166",
+      "id": "networking-processes-inspect-a-tls-handshake",
       "category": "Networking & processes",
-      "tool": "openssl",
       "title": "Inspect a TLS handshake",
       "command": "openssl s_client -connect example.com:443 -servername example.com </dev/null",
       "explanation": "Uses SNI for the correct certificate. Check verification output; the handshake alone is not an application health check.",
       "level": "Advanced",
       "effect": "Network",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "openssl"
     },
     {
-      "id": "r167",
+      "id": "networking-processes-open-the-current-directory",
       "category": "Networking & processes",
-      "tool": "open",
       "title": "Open the current directory",
       "command": "open .",
       "explanation": "Opens the directory in Finder on macOS. The Linux equivalent is xdg-open .",
       "level": "Start",
       "effect": "Run",
-      "source": "https://support.apple.com/guide/terminal/open-or-quit-terminal-trml35697/mac"
+      "source": "https://support.apple.com/guide/terminal/open-or-quit-terminal-trml35697/mac",
+      "tool": "open"
     },
     {
-      "id": "r168",
+      "id": "networking-processes-copy-a-file-to-the-clipboard",
       "category": "Networking & processes",
-      "tool": "pbcopy",
       "title": "Copy a file to the clipboard",
       "command": "pbcopy < README.md",
       "explanation": "macOS clipboard. Replaces its contents. On Linux use xclip -selection clipboard or wl-copy. Never pipe secrets into a synced clipboard.",
       "level": "Start",
       "effect": "Write",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "pbcopy"
     },
     {
-      "id": "r169",
+      "id": "networking-processes-read-clipboard-text",
       "category": "Networking & processes",
-      "tool": "pbpaste",
       "title": "Read clipboard text",
       "command": "pbpaste",
       "explanation": "Prints the macOS text clipboard. On Linux use xclip -o -selection clipboard or wl-paste.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "pbpaste"
     },
     {
-      "id": "r170",
+      "id": "networking-processes-keep-a-long-job-awake",
       "category": "Networking & processes",
-      "tool": "caffeinate",
       "title": "Keep a long job awake",
       "command": "caffeinate -i pnpm build",
       "explanation": "Prevents idle sleep only while the command runs. Does not permanently change power settings.",
       "level": "Intermediate",
       "effect": "Run",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "caffeinate"
     },
     {
-      "id": "r171",
+      "id": "networking-processes-check-battery-and-power-source",
       "category": "Networking & processes",
-      "tool": "pmset",
       "title": "Check battery and power source",
       "command": "pmset -g batt",
       "explanation": "Read-only power status.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "pmset"
     },
     {
-      "id": "r172",
+      "id": "networking-processes-check-memory-pressure",
       "category": "Networking & processes",
-      "tool": "memory_pressure",
       "title": "Check memory pressure",
       "command": "memory_pressure",
       "explanation": "macOS memory statistics. Never use its pressure-generation options for a routine check. On Linux, read free -h and /proc/pressure/memory.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "memory_pressure"
     },
     {
-      "id": "r173",
+      "id": "networking-processes-check-swap-use",
       "category": "Networking & processes",
-      "tool": "sysctl",
       "title": "Check swap use",
       "command": "sysctl vm.swapusage",
       "explanation": "Snapshot of swap usage; sustained pressure matters more than a single number.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "sysctl"
     },
     {
-      "id": "r174",
+      "id": "networking-processes-inspect-cpu-and-memory-interactively",
       "category": "Networking & processes",
-      "tool": "btop",
       "title": "Inspect CPU and memory interactively",
       "command": "btop",
       "explanation": "Full-screen resource dashboard. q exits. htop is the lighter classic alternative.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/aristocratos/btop"
+      "source": "https://github.com/aristocratos/btop",
+      "tool": "btop"
     },
     {
-      "id": "r175",
+      "id": "networking-processes-use-the-macos-process-monitor",
       "category": "Networking & processes",
-      "tool": "top",
       "title": "Use the macOS process monitor",
       "command": "top -l 1 -o cpu -n 10",
       "explanation": "One snapshot sorted by CPU. macOS top flags differ from Linux top.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "top"
     },
     {
-      "id": "r176",
+      "id": "networking-processes-inspect-processes-with-procs",
       "category": "Networking & processes",
-      "tool": "procs",
       "title": "Inspect processes with procs",
       "command": "procs",
       "explanation": "A more readable ps. macOS permissions limit what any tool can see about other users' processes.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/dalance/procs"
+      "source": "https://github.com/dalance/procs",
+      "tool": "procs"
     },
     {
-      "id": "r177",
+      "id": "networking-processes-alternative-process-dashboard",
       "category": "Networking & processes",
-      "tool": "htop",
       "title": "Alternative process dashboard",
       "command": "htop",
       "explanation": "The classic interactive process viewer. F10 or q exits.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://htop.dev/"
+      "source": "https://htop.dev/",
+      "tool": "htop"
     },
     {
-      "id": "r178",
+      "id": "networking-processes-check-disk-capacity",
       "category": "Networking & processes",
-      "tool": "duf",
       "title": "Check disk capacity",
       "command": "duf",
       "explanation": "Shows mounted filesystem space in a table. df -h is the built-in alternative.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/muesli/duf"
+      "source": "https://github.com/muesli/duf",
+      "tool": "duf"
     },
     {
-      "id": "r179",
+      "id": "networking-processes-find-a-directory-s-large-children",
       "category": "Networking & processes",
-      "tool": "dust",
       "title": "Find a directory's large children",
       "command": "dust -d 2 ~/projects",
       "explanation": "Read-only size scan, two levels deep. Point it at a directory rather than scanning the whole disk.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://github.com/bootandy/dust"
+      "source": "https://github.com/bootandy/dust",
+      "tool": "dust"
     },
     {
-      "id": "r180",
+      "id": "networking-processes-see-macos-version",
       "category": "Networking & processes",
-      "tool": "sw_vers",
       "title": "See macOS version",
       "command": "sw_vers",
       "explanation": "Reports installed macOS version and build.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "sw_vers"
     },
     {
-      "id": "r181",
+      "id": "networking-processes-inspect-hardware",
       "category": "Networking & processes",
-      "tool": "system_profiler",
       "title": "Inspect hardware",
       "command": "system_profiler SPHardwareDataType",
       "explanation": "macOS hardware summary. It includes serial identifiers: redact them before sharing the output. On Linux use lscpu and free -h.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "system_profiler"
     },
     {
-      "id": "r182",
+      "id": "networking-processes-check-developer-tools",
       "category": "Networking & processes",
-      "tool": "xcode-select",
       "title": "Check developer tools",
       "command": "xcode-select -p",
       "explanation": "Prints the active macOS developer-tools directory. Many Homebrew builds need Apple's Command Line Tools.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "xcode-select"
     },
     {
-      "id": "r183",
+      "id": "networking-processes-review-an-ssh-host-config",
       "category": "Networking & processes",
-      "tool": "ssh",
       "title": "Review an SSH host config",
       "command": "ssh -G example-host",
       "explanation": "Prints effective SSH configuration for a host alias without connecting. Replace the alias; output may include private network paths.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "ssh"
     },
     {
-      "id": "r184",
+      "id": "networking-processes-preview-a-directory-sync",
       "category": "Networking & processes",
-      "tool": "rsync",
       "title": "Preview a directory sync",
       "command": "rsync -avhn source/ destination/",
       "explanation": "-n is a dry run. A trailing slash on the source copies its contents rather than the directory itself. Read the plan before removing -n.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "rsync"
     },
     {
-      "id": "r185",
+      "id": "networking-processes-list-gpg-public-keys",
       "category": "Networking & processes",
-      "tool": "gpg",
       "title": "List GPG public keys",
       "command": "gpg --list-keys",
       "explanation": "Read-only inventory of public keys. Never export secret keys just to debug signing.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "gpg"
     },
     {
-      "id": "r186",
+      "id": "networking-processes-inspect-a-file-type",
       "category": "Networking & processes",
-      "tool": "file",
       "title": "Inspect a file type",
       "command": "file path/to/file",
       "explanation": "Useful before deciding whether a file is text, binary, an archive or an executable.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://curl.se/docs/manpage.html"
+      "source": "https://curl.se/docs/manpage.html",
+      "tool": "file"
     },
     {
-      "id": "r187",
+      "id": "editors-sessions-open-a-project-in-vs-code",
       "category": "Editors & sessions",
-      "tool": "code",
       "title": "Open a project in VS Code",
       "command": "code .",
       "explanation": "Opens the current directory, if the code command is on your PATH. Set EDITOR=\"code --wait\" so Git waits for the window to close.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://github.com/tmux/tmux/wiki"
+      "source": "https://github.com/tmux/tmux/wiki",
+      "tool": "code"
     },
     {
-      "id": "r188",
+      "id": "editors-sessions-open-a-terminal-editor",
       "category": "Editors & sessions",
-      "tool": "neovim",
       "title": "Open a terminal editor",
       "command": "nvim README.md",
       "explanation": "Neovim with no configuration is already usable. Distributions such as LazyVim add language support on top.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://neovim.io/doc/"
+      "source": "https://neovim.io/doc/",
+      "tool": "neovim"
     },
     {
-      "id": "r189",
+      "id": "editors-sessions-learn-vim-interactively",
       "category": "Editors & sessions",
-      "tool": "neovim",
       "title": "Learn Vim interactively",
       "command": "nvim +Tutor",
       "explanation": "Opens Neovim's tutorial. Esc returns to normal mode; :q exits, :w saves.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://neovim.io/doc/"
+      "source": "https://neovim.io/doc/",
+      "tool": "neovim"
     },
     {
-      "id": "r190",
+      "id": "editors-sessions-start-a-named-session",
       "category": "Editors & sessions",
-      "tool": "tmux",
       "title": "Start a named session",
       "command": "tmux new -s dev",
       "explanation": "Creates a terminal session that survives terminal disconnection. Default prefix is Ctrl+B.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://github.com/tmux/tmux/wiki"
+      "source": "https://github.com/tmux/tmux/wiki",
+      "tool": "tmux"
     },
     {
-      "id": "r191",
+      "id": "editors-sessions-list-sessions",
       "category": "Editors & sessions",
-      "tool": "tmux",
       "title": "List sessions",
       "command": "tmux ls",
       "explanation": "Shows saved sessions; no server running is normal if you have never started tmux.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/tmux/tmux/wiki"
+      "source": "https://github.com/tmux/tmux/wiki",
+      "tool": "tmux"
     },
     {
-      "id": "r192",
+      "id": "editors-sessions-reattach-a-session",
       "category": "Editors & sessions",
-      "tool": "tmux",
       "title": "Reattach a session",
       "command": "tmux attach -t dev",
       "explanation": "Return to the named dev session. Ctrl+B then D detaches without stopping processes.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://github.com/tmux/tmux/wiki"
+      "source": "https://github.com/tmux/tmux/wiki",
+      "tool": "tmux"
     },
     {
-      "id": "r193",
+      "id": "editors-sessions-inspect-tmux-bindings",
       "category": "Editors & sessions",
-      "tool": "tmux",
       "title": "Inspect tmux bindings",
       "command": "tmux list-keys",
       "explanation": "Available once a server exists. Default prefix shortcuts: % split vertically, double quote split horizontally, c new window.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://github.com/tmux/tmux/wiki"
+      "source": "https://github.com/tmux/tmux/wiki",
+      "tool": "tmux"
     },
     {
-      "id": "r194",
+      "id": "editors-sessions-validate-a-terminal-config",
       "category": "Editors & sessions",
-      "tool": "ghostty",
       "title": "Validate a terminal config",
       "command": "ghostty +validate-config",
       "explanation": "Checks the config file for errors before you reload. On macOS the binary lives inside the app bundle: /Applications/Ghostty.app/Contents/MacOS/ghostty.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://github.com/tmux/tmux/wiki"
+      "source": "https://github.com/tmux/tmux/wiki",
+      "tool": "ghostty"
     },
     {
-      "id": "r195",
+      "id": "editors-sessions-read-every-terminal-option",
       "category": "Editors & sessions",
-      "tool": "ghostty",
       "title": "Read every terminal option",
       "command": "ghostty +show-config --default --docs",
       "explanation": "Prints the documented defaults for the installed build. Pipe it into less; it is long.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://github.com/tmux/tmux/wiki"
+      "source": "https://github.com/tmux/tmux/wiki",
+      "tool": "ghostty"
     },
     {
-      "id": "r196",
+      "id": "editors-sessions-check-direnv-state",
       "category": "Editors & sessions",
-      "tool": "direnv",
       "title": "Check direnv state",
       "command": "direnv status",
       "explanation": "Shows whether this directory's environment is loaded and permitted. direnv needs a hook in your .zshrc to do anything.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://direnv.net/"
+      "source": "https://direnv.net/",
+      "tool": "direnv"
     },
     {
-      "id": "r197",
+      "id": "editors-sessions-allow-a-reviewed-environment",
       "category": "Editors & sessions",
-      "tool": "direnv",
       "title": "Allow a reviewed environment",
       "command": "direnv allow .",
       "explanation": "Executes the directory's .envrc as shell code. Read it first, especially in a newly cloned repository.",
       "level": "Intermediate",
       "effect": "Run",
-      "source": "https://direnv.net/"
+      "source": "https://direnv.net/",
+      "tool": "direnv"
     },
     {
-      "id": "r198",
+      "id": "packages-maintenance-get-short-practical-help",
       "category": "Packages & maintenance",
-      "tool": "tealdeer",
       "title": "Get short practical help",
       "command": "tldr tar",
       "explanation": "tealdeer provides the tldr executable. If its cache is missing, tldr --update downloads examples.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/tealdeer-rs/tealdeer"
+      "source": "https://github.com/tealdeer-rs/tealdeer",
+      "tool": "tealdeer"
     },
     {
-      "id": "r199",
+      "id": "packages-maintenance-read-full-help",
       "category": "Packages & maintenance",
-      "tool": "ripgrep",
       "title": "Read full help",
       "command": "rg --help",
       "explanation": "Almost every tool answers --help. Use man for system commands, and SUBCOMMAND --help for nested CLIs such as git or docker.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://github.com/BurntSushi/ripgrep"
+      "source": "https://github.com/BurntSushi/ripgrep",
+      "tool": "ripgrep"
     },
     {
-      "id": "r200",
+      "id": "packages-maintenance-inspect-a-package",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "Inspect a package",
       "command": "brew info ripgrep",
       "explanation": "Shows version, description, dependencies and installation details. Package name ripgrep provides executable rg.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r201",
+      "id": "packages-maintenance-list-installed-command-packages",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "List installed command packages",
       "command": "brew list --formula",
       "explanation": "Includes libraries and transitive dependencies, not just user-facing CLIs.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r202",
+      "id": "packages-maintenance-list-installed-desktop-packages",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "List installed desktop packages",
       "command": "brew list --cask",
       "explanation": "macOS GUI apps and fonts installed through Homebrew. Fonts provide no commands of their own.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r203",
+      "id": "packages-maintenance-understand-why-a-library-exists",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "Understand why a library exists",
       "command": "brew uses --installed libpng",
       "explanation": "Shows installed packages that depend on libpng. Avoid manually deleting dependency directories.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r204",
+      "id": "packages-maintenance-list-leaf-packages",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "List leaf packages",
       "command": "brew leaves",
       "explanation": "Packages not required by other installed formulae. A leaf is not necessarily unused.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r205",
+      "id": "packages-maintenance-check-missing-dependencies",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "Check missing dependencies",
       "command": "brew missing",
       "explanation": "No output is the good result: every installed formula has what it declares.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r206",
+      "id": "packages-maintenance-run-homebrew-diagnostics",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "Run Homebrew diagnostics",
       "command": "brew doctor",
       "explanation": "Reports common installation problems. Read each warning before acting; never answer a permissions warning with a recursive sudo chown.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r207",
+      "id": "packages-maintenance-refresh-package-metadata",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "Refresh package metadata",
       "command": "brew update",
       "explanation": "Downloads current metadata; does not upgrade all installed formulae.",
       "level": "Intermediate",
       "effect": "Network",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r208",
+      "id": "packages-maintenance-review-available-updates",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "Review available updates",
       "command": "brew outdated",
       "explanation": "Run after brew update. Read the list before upgrading; a major version bump can change a tool's flags.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r209",
+      "id": "packages-maintenance-upgrade-one-selected-tool",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "Upgrade one selected tool",
       "command": "brew upgrade ripgrep",
       "explanation": "Updates only the selected formula and any needed dependencies. Verify your workflow after upgrading.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r210",
+      "id": "packages-maintenance-preview-cache-cleanup",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "Preview cache cleanup",
       "command": "brew cleanup --dry-run",
       "explanation": "Lists what would be removed without deleting anything. Drop --dry-run only after reading the list.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r211",
+      "id": "packages-maintenance-preview-unused-dependency-removal",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "Preview unused dependency removal",
       "command": "brew autoremove --dry-run",
       "explanation": "Read the proposed list before considering a real removal.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r212",
+      "id": "packages-maintenance-locate-a-package-s-files",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "Locate a package's files",
       "command": "brew list libarchive",
       "explanation": "Lists files installed by a package, including executables that may not be linked into PATH.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r213",
+      "id": "packages-maintenance-export-a-reproducible-package-list",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "Export a reproducible package list",
       "command": "brew bundle dump --file=./Brewfile",
       "explanation": "Writes a Brewfile listing what you installed. It refuses to overwrite an existing file unless forced. This is how you rebuild a machine.",
       "level": "Advanced",
       "effect": "Write",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r214",
+      "id": "packages-maintenance-check-a-brewfile",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "Check a Brewfile",
       "command": "brew bundle check --file=./Brewfile",
       "explanation": "Compares a manifest with installed dependencies. It does not install missing packages.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r215",
+      "id": "packages-maintenance-inspect-a-cask",
       "category": "Packages & maintenance",
-      "tool": "brew",
       "title": "Inspect a cask",
       "command": "brew info --cask ghostty",
       "explanation": "Shows a GUI app's version, install path and upstream site. Casks are macOS-only.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://docs.brew.sh/Manpage"
+      "source": "https://docs.brew.sh/Manpage",
+      "tool": "brew"
     },
     {
-      "id": "r216",
+      "id": "packages-maintenance-update-an-isolated-python-tool",
       "category": "Packages & maintenance",
-      "tool": "uv",
       "title": "Update an isolated Python tool",
       "command": "uv tool upgrade ruff",
       "explanation": "Upgrades that tool's own environment and nothing else. Replace ruff with a tool from uv tool list.",
       "level": "Advanced",
       "effect": "Write",
-      "source": "https://docs.astral.sh/uv/reference/cli/"
+      "source": "https://docs.astral.sh/uv/reference/cli/",
+      "tool": "uv"
     },
     {
-      "id": "r217",
+      "id": "packages-maintenance-see-local-pnpm-storage",
       "category": "Packages & maintenance",
-      "tool": "pnpm",
       "title": "See local pnpm storage",
       "command": "pnpm store path",
       "explanation": "Prints the shared content-addressed store location. Do not delete it while installs run.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://pnpm.io/cli/run"
+      "source": "https://pnpm.io/cli/run",
+      "tool": "pnpm"
     },
     {
-      "id": "r218",
+      "id": "packages-maintenance-check-git-settings-with-origins",
       "category": "Packages & maintenance",
-      "tool": "git",
       "title": "Check Git settings with origins",
       "command": "git config --show-origin --get-regexp '^(core.pager|fetch.prune|pull.rebase|delta\\.)'",
       "explanation": "Shows which file each setting came from. A narrow pattern avoids dumping credentials and private remote URLs.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r219",
+      "id": "shell-foundations-read-a-file-without-decorations",
       "category": "Shell foundations",
-      "tool": "command",
       "title": "Read a file without decorations",
       "command": "command cat README.md",
       "explanation": "Plain text is best for pipelines and scripts; bat is useful for interactive reading.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://www.gnu.org/software/coreutils/manual/"
+      "source": "https://www.gnu.org/software/coreutils/manual/",
+      "tool": "cat"
     },
     {
-      "id": "r220",
+      "id": "shell-foundations-read-the-beginning-of-a-log",
       "category": "Shell foundations",
-      "tool": "head",
       "title": "Read the beginning of a log",
       "command": "head -n 40 app.log",
       "explanation": "Replace the example filename. Avoid printing entire large logs or files containing secrets.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://www.gnu.org/software/coreutils/manual/"
+      "source": "https://www.gnu.org/software/coreutils/manual/",
+      "tool": "head"
     },
     {
-      "id": "r221",
+      "id": "shell-foundations-follow-a-rotating-log",
       "category": "Shell foundations",
-      "tool": "tail",
       "title": "Follow a rotating log",
       "command": "tail -F app.log",
       "explanation": "Follows the filename across replacement or rotation. Ctrl+C stops watching.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://www.gnu.org/software/coreutils/manual/"
+      "source": "https://www.gnu.org/software/coreutils/manual/",
+      "tool": "tail"
     },
     {
-      "id": "r222",
+      "id": "shell-foundations-extract-a-range-of-lines",
       "category": "Shell foundations",
-      "tool": "sed",
       "title": "Extract a range of lines",
       "command": "sed -n '20,40p' README.md",
       "explanation": "Prints a line range without editing the file. macOS ships BSD sed, Linux ships GNU sed, and their in-place editing flags differ.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://www.gnu.org/software/coreutils/manual/"
+      "source": "https://www.gnu.org/software/coreutils/manual/",
+      "tool": "sed"
     },
     {
-      "id": "r223",
+      "id": "shell-foundations-count-lines-words-and-bytes",
       "category": "Shell foundations",
-      "tool": "wc",
       "title": "Count lines, words and bytes",
       "command": "wc README.md",
       "explanation": "Reports basic text counts. wc -l selects lines; wc -c selects bytes.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://www.gnu.org/software/coreutils/manual/"
+      "source": "https://www.gnu.org/software/coreutils/manual/",
+      "tool": "wc"
     },
     {
-      "id": "r224",
+      "id": "shell-foundations-sort-and-deduplicate-text",
       "category": "Shell foundations",
-      "tool": "printf",
       "title": "Sort and deduplicate text",
       "command": "printf '%s\\n' beta alpha beta | sort | uniq -c",
       "explanation": "Produces a sorted frequency table. uniq only combines adjacent duplicate lines, so sorting matters.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://www.gnu.org/software/coreutils/manual/"
+      "source": "https://www.gnu.org/software/coreutils/manual/",
+      "tool": "printf"
     },
     {
-      "id": "r225",
+      "id": "shell-foundations-select-a-delimited-column",
       "category": "Shell foundations",
-      "tool": "cut",
       "title": "Select a delimited column",
       "command": "cut -d, -f1 simple.csv",
       "explanation": "Works for simple delimiter-separated text. Quoted CSV fields need a proper CSV parser, not cut.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://www.gnu.org/software/coreutils/manual/"
+      "source": "https://www.gnu.org/software/coreutils/manual/",
+      "tool": "cut"
     },
     {
-      "id": "r226",
+      "id": "shell-foundations-compute-with-awk",
       "category": "Shell foundations",
-      "tool": "printf",
       "title": "Compute with awk",
       "command": "printf 'alpha 2\\nbeta 3\\n' | awk '{sum += $2} END {print sum}'",
       "explanation": "Accumulates the second whitespace-separated field. Start with small sample input to understand the transformation.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://www.gnu.org/software/coreutils/manual/"
+      "source": "https://www.gnu.org/software/coreutils/manual/",
+      "tool": "printf"
     },
     {
-      "id": "r227",
+      "id": "shell-foundations-pass-filenames-without-splitting-spaces",
       "category": "Shell foundations",
-      "tool": "fd",
       "title": "Pass filenames without splitting spaces",
       "command": "fd -0 -e md --type f | xargs -0 -I{} printf 'Found: %s\\n' '{}'",
       "explanation": "NUL-delimited records preserve spaces and most unusual filenames. This example only prints a preview.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://github.com/sharkdp/fd"
+      "source": "https://github.com/sharkdp/fd",
+      "tool": "fd"
     },
     {
-      "id": "r228",
+      "id": "shell-foundations-compare-two-files",
       "category": "Shell foundations",
-      "tool": "diff",
       "title": "Compare two files",
       "command": "diff -u old.txt new.txt",
       "explanation": "Unified diff. Exit 1 means files differ; it is not necessarily a tool failure.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://www.gnu.org/software/coreutils/manual/"
+      "source": "https://www.gnu.org/software/coreutils/manual/",
+      "tool": "diff"
     },
     {
-      "id": "r229",
+      "id": "shell-foundations-read-long-output-in-a-pager",
       "category": "Shell foundations",
-      "tool": "git",
       "title": "Read long output in a pager",
       "command": "git log --oneline | less",
       "explanation": "Space scrolls a page, / searches, n advances and q quits.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://git-scm.com/docs"
+      "source": "https://git-scm.com/docs",
+      "tool": "git"
     },
     {
-      "id": "r230",
+      "id": "shell-foundations-inspect-file-permissions",
       "category": "Shell foundations",
-      "tool": "stat",
       "title": "Inspect file permissions",
       "command": "stat -f '%Sp %Su %Sg %N' README.md",
       "explanation": "Shows mode, owner, group and name. This is BSD syntax for macOS; GNU stat on Linux uses stat -c '%A %U %G %n'.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://www.gnu.org/software/coreutils/manual/"
+      "source": "https://www.gnu.org/software/coreutils/manual/",
+      "tool": "stat"
     },
     {
-      "id": "r231",
+      "id": "shell-foundations-understand-an-executable-permission",
       "category": "Shell foundations",
-      "tool": "ls",
       "title": "Understand an executable permission",
       "command": "ls -l script.zsh",
       "explanation": "Inspect before changing modes. chmod u+x script.zsh adds execute permission for the owner only.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://www.gnu.org/software/coreutils/manual/"
+      "source": "https://www.gnu.org/software/coreutils/manual/",
+      "tool": "ls"
     },
     {
-      "id": "r232",
+      "id": "macos-specifics-search-with-spotlight",
       "category": "macOS specifics",
-      "tool": "mdfind",
       "title": "Search with Spotlight",
       "command": "mdfind -onlyin ~/projects 'kMDItemFSName == \"README.md\"'",
       "explanation": "Uses the Spotlight index, so an empty result is not proof a file is absent. fd reads the directory itself.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "mdfind"
     },
     {
-      "id": "r233",
+      "id": "macos-specifics-inspect-mounted-disks",
       "category": "macOS specifics",
-      "tool": "diskutil",
       "title": "Inspect mounted disks",
       "command": "diskutil list",
       "explanation": "Lists disks and partitions without modifying them. Disk erase and repair subcommands are separate operations.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "diskutil"
     },
     {
-      "id": "r234",
+      "id": "macos-specifics-inspect-network-interfaces",
       "category": "macOS specifics",
-      "tool": "networksetup",
       "title": "Inspect network interfaces",
       "command": "networksetup -listallhardwareports",
       "explanation": "Maps hardware ports to device names such as en0. Does not change network configuration.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "networksetup"
     },
     {
-      "id": "r235",
+      "id": "macos-specifics-inspect-macos-dns-configuration",
       "category": "macOS specifics",
-      "tool": "scutil",
       "title": "Inspect macOS DNS configuration",
       "command": "scutil --dns",
       "explanation": "Useful when VPN or split DNS behaves differently from a direct dig query. Output can reveal internal network names.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "scutil"
     },
     {
-      "id": "r236",
+      "id": "macos-specifics-inspect-proxy-configuration",
       "category": "macOS specifics",
-      "tool": "scutil",
       "title": "Inspect proxy configuration",
       "command": "scutil --proxy",
       "explanation": "Read-only check for system HTTP/SOCKS proxy settings. Individual CLI tools may also use environment variables.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "scutil"
     },
     {
-      "id": "r237",
+      "id": "macos-specifics-check-one-preference-domain",
       "category": "macOS specifics",
-      "tool": "defaults",
       "title": "Check one preference domain",
       "command": "defaults read com.apple.finder AppleShowAllFiles",
       "explanation": "Reads a single Finder preference. A missing key means there is no explicit user override.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "defaults"
     },
     {
-      "id": "r238",
+      "id": "macos-specifics-validate-a-property-list",
       "category": "macOS specifics",
-      "tool": "plutil",
       "title": "Validate a property list",
       "command": "plutil -lint ~/Library/LaunchAgents/com.example.agent.plist",
       "explanation": "Checks plist syntax only. Valid XML does not mean the program it points at will start.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "plutil"
     },
     {
-      "id": "r239",
+      "id": "macos-specifics-inspect-a-launch-agent",
       "category": "macOS specifics",
-      "tool": "launchctl",
       "title": "Inspect a launch agent",
       "command": "launchctl print gui/$(id -u)/com.example.agent",
       "explanation": "Reports registration and last-exit status for a per-user agent. The Linux equivalent is systemctl --user status.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "launchctl"
     },
     {
-      "id": "r240",
+      "id": "macos-specifics-check-update-availability",
       "category": "macOS specifics",
-      "tool": "softwareupdate",
       "title": "Check update availability",
       "command": "softwareupdate --list",
       "explanation": "Contacts Apple's update service and lists available updates without installing them. May take a while.",
       "level": "Intermediate",
       "effect": "Network",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "softwareupdate"
     },
     {
-      "id": "r241",
+      "id": "macos-specifics-create-a-screenshot-file",
       "category": "macOS specifics",
-      "tool": "screencapture",
       "title": "Create a screenshot file",
       "command": "screencapture -i ~/Desktop/terminal-example.png",
       "explanation": "Opens macOS interactive capture and writes your selection. Review the visible content before sharing the image.",
       "level": "Start",
       "effect": "Write",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "screencapture"
     },
     {
-      "id": "r242",
+      "id": "macos-specifics-show-recent-app-log-events",
       "category": "macOS specifics",
-      "tool": "log",
       "title": "Show recent app log events",
       "command": "log show --last 5m --style compact --predicate 'process == \"Ghostty\"'",
       "explanation": "Narrows the macOS unified log to one process and a short window. Logs can contain private content. journalctl is the Linux counterpart.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "log"
     },
     {
-      "id": "r243",
+      "id": "macos-specifics-check-backup-status",
       "category": "macOS specifics",
-      "tool": "tmutil",
       "title": "Check backup status",
       "command": "tmutil status",
       "explanation": "Reports Time Machine's current operation. An idle result does not prove a recent backup exists.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "tmutil"
     },
     {
-      "id": "r244",
+      "id": "macos-specifics-read-archive-contents",
       "category": "macOS specifics",
-      "tool": "tar",
       "title": "Read archive contents",
       "command": "tar -tf archive.tar.gz",
       "explanation": "Lists what an archive holds without extracting it. Always look before extracting an archive you did not create.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "tar"
     },
     {
-      "id": "r245",
+      "id": "macos-specifics-create-a-project-note-archive",
       "category": "macOS specifics",
-      "tool": "tar",
       "title": "Create a project-note archive",
       "command": "tar -czf notes-backup.tar.gz README.md docs",
       "explanation": "Writes an archive from explicit files and folders. Choose a new output path and exclude secrets.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "tar"
     },
     {
-      "id": "r246",
+      "id": "macos-specifics-connect-using-ssh",
       "category": "macOS specifics",
-      "tool": "ssh",
       "title": "Connect using SSH",
       "command": "ssh user@example-host",
       "explanation": "Replace with your account and host. Verify a new host's fingerprint through a trusted channel before accepting it.",
       "level": "Intermediate",
       "effect": "Network",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "ssh"
     },
     {
-      "id": "r247",
+      "id": "macos-specifics-copy-one-file-over-ssh",
       "category": "macOS specifics",
-      "tool": "scp",
       "title": "Copy one file over SSH",
       "command": "scp ./report.txt user@example-host:/path/to/destination/",
       "explanation": "Replace the example user, host and directory. Uploads the file to that host and may overwrite an existing destination file.",
       "level": "Intermediate",
       "effect": "Remote write",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "scp"
     },
     {
-      "id": "r248",
+      "id": "macos-specifics-check-the-selected-editor",
       "category": "macOS specifics",
-      "tool": "print",
       "title": "Check the selected editor",
       "command": "print -r -- \"$EDITOR\"",
       "explanation": "Git and other tools open this. A value such as code --wait makes them wait for the window to close.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://support.apple.com/guide/terminal/welcome/mac"
+      "source": "https://support.apple.com/guide/terminal/welcome/mac",
+      "tool": "print"
     },
     {
-      "id": "r249",
+      "id": "linux-specifics-identify-the-distribution",
       "category": "Linux specifics",
-      "tool": "cat",
       "title": "Identify the distribution",
       "command": "cat /etc/os-release",
       "explanation": "Tells you which package manager and package names apply. Scripts should read ID and VERSION_ID rather than guessing.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://www.freedesktop.org/software/systemd/man/"
+      "source": "https://www.freedesktop.org/software/systemd/man/",
+      "tool": "cat"
     },
     {
-      "id": "r250",
+      "id": "linux-specifics-see-listening-ports",
       "category": "Linux specifics",
-      "tool": "ss",
       "title": "See listening ports",
       "command": "ss -tlnp",
       "explanation": "The Linux answer to lsof for ports. Process names for other users' processes need sudo.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://man7.org/linux/man-pages/man8/ss.8.html"
+      "source": "https://man7.org/linux/man-pages/man8/ss.8.html",
+      "tool": "ss"
     },
     {
-      "id": "r251",
+      "id": "linux-specifics-check-a-service",
       "category": "Linux specifics",
-      "tool": "systemctl",
       "title": "Check a service",
       "command": "systemctl status docker",
       "explanation": "Shows whether a service is enabled, running and what it last logged. Replace docker with any unit name.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://www.freedesktop.org/software/systemd/man/systemctl.html"
+      "source": "https://www.freedesktop.org/software/systemd/man/systemctl.html",
+      "tool": "systemctl"
     },
     {
-      "id": "r252",
+      "id": "linux-specifics-start-a-service-now-and-at-boot",
       "category": "Linux specifics",
-      "tool": "sudo",
       "title": "Start a service now and at boot",
       "command": "sudo systemctl enable --now docker",
       "explanation": "Two things at once: start it, and start it on every boot. Use disable --now to undo both.",
       "level": "Intermediate",
       "effect": "Disruptive",
-      "source": "https://www.freedesktop.org/software/systemd/man/"
+      "source": "https://www.freedesktop.org/software/systemd/man/systemctl.html",
+      "tool": "systemctl"
     },
     {
-      "id": "r253",
+      "id": "linux-specifics-read-a-service-s-logs",
       "category": "Linux specifics",
-      "tool": "journalctl",
       "title": "Read a service's logs",
       "command": "journalctl -u docker -n 100 --no-pager",
       "explanation": "The last 100 lines for one unit. Add -f to follow. Add --since '10 min ago' to bound it by time.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://www.freedesktop.org/software/systemd/man/journalctl.html"
+      "source": "https://www.freedesktop.org/software/systemd/man/journalctl.html",
+      "tool": "journalctl"
     },
     {
-      "id": "r254",
+      "id": "linux-specifics-read-your-own-user-services",
       "category": "Linux specifics",
-      "tool": "systemctl",
       "title": "Read your own user services",
       "command": "systemctl --user list-units --type=service",
       "explanation": "Per-user services, the counterpart to macOS launch agents.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://www.freedesktop.org/software/systemd/man/systemctl.html"
+      "source": "https://www.freedesktop.org/software/systemd/man/systemctl.html",
+      "tool": "systemctl"
     },
     {
-      "id": "r255",
+      "id": "linux-specifics-check-memory-and-swap",
       "category": "Linux specifics",
-      "tool": "free",
       "title": "Check memory and swap",
       "command": "free -h",
       "explanation": "Human-readable totals. The available column matters more than free: Linux deliberately uses spare memory for cache.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://www.freedesktop.org/software/systemd/man/"
+      "source": "https://www.freedesktop.org/software/systemd/man/",
+      "tool": "free"
     },
     {
-      "id": "r256",
+      "id": "linux-specifics-check-memory-pressure",
       "category": "Linux specifics",
-      "tool": "cat",
       "title": "Check memory pressure",
       "command": "cat /proc/pressure/memory",
       "explanation": "Pressure stall information: how much time tasks spent waiting on memory. Better evidence than a single free number.",
       "level": "Advanced",
       "effect": "Inspect",
-      "source": "https://www.freedesktop.org/software/systemd/man/"
+      "source": "https://www.freedesktop.org/software/systemd/man/",
+      "tool": "cat"
     },
     {
-      "id": "r257",
+      "id": "linux-specifics-describe-the-cpu",
       "category": "Linux specifics",
-      "tool": "lscpu",
       "title": "Describe the CPU",
       "command": "lscpu | Cores, threads, architecture and flags. lscpu",
       "explanation": "rg 'Model name' narrows it to one line.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://www.freedesktop.org/software/systemd/man/"
+      "source": "https://www.freedesktop.org/software/systemd/man/",
+      "tool": "lscpu"
     },
     {
-      "id": "r258",
+      "id": "linux-specifics-check-disk-space",
       "category": "Linux specifics",
-      "tool": "df",
       "title": "Check disk space",
       "command": "df -h",
       "explanation": "Built-in and always present. duf prints the same data in a friendlier table.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://www.freedesktop.org/software/systemd/man/"
+      "source": "https://www.freedesktop.org/software/systemd/man/",
+      "tool": "df"
     },
     {
-      "id": "r259",
+      "id": "linux-specifics-search-installed-packages",
       "category": "Linux specifics",
-      "tool": "apt",
       "title": "Search installed packages",
       "command": "apt list --installed",
       "explanation": "Debian and Ubuntu. Fedora uses dnf list installed; Arch uses pacman -Q.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://manpages.debian.org/stable/apt/apt.8.en.html"
+      "source": "https://manpages.debian.org/stable/apt/apt.8.en.html",
+      "tool": "apt"
     },
     {
-      "id": "r260",
+      "id": "linux-specifics-find-which-package-owns-a-file",
       "category": "Linux specifics",
-      "tool": "dpkg",
       "title": "Find which package owns a file",
       "command": "dpkg -S \"$(command -v git)\"",
       "explanation": "Debian and Ubuntu. Fedora uses dnf provides; Arch uses pacman -Qo.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://manpages.debian.org/stable/dpkg/dpkg.1.en.html"
+      "source": "https://manpages.debian.org/stable/dpkg/dpkg.1.en.html",
+      "tool": "dpkg"
     },
     {
-      "id": "r261",
+      "id": "linux-specifics-read-a-package-s-description",
       "category": "Linux specifics",
-      "tool": "apt",
       "title": "Read a package's description",
       "command": "apt show ripgrep",
       "explanation": "Version, size, dependencies and homepage, before installing anything.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://manpages.debian.org/stable/apt/apt.8.en.html"
+      "source": "https://manpages.debian.org/stable/apt/apt.8.en.html",
+      "tool": "apt"
     },
     {
-      "id": "r262",
+      "id": "linux-specifics-refresh-and-inspect-updates",
       "category": "Linux specifics",
-      "tool": "apt",
       "title": "Refresh and inspect updates",
       "command": "sudo apt update\napt list --upgradable",
       "explanation": "update refreshes metadata only. Nothing is upgraded until you run apt upgrade.",
       "level": "Intermediate",
       "effect": "Network",
-      "source": "https://manpages.debian.org/stable/apt/apt.8.en.html"
+      "source": "https://manpages.debian.org/stable/apt/apt.8.en.html",
+      "tool": "apt"
     },
     {
-      "id": "r263",
+      "id": "linux-specifics-make-zsh-your-login-shell",
       "category": "Linux specifics",
-      "tool": "chsh",
       "title": "Make zsh your login shell",
       "command": "chsh -s \"$(command -v zsh)\"",
       "explanation": "Takes effect at your next login, not in this terminal. Install zsh first or you will be locked out of a working shell.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://www.freedesktop.org/software/systemd/man/"
+      "source": "https://www.freedesktop.org/software/systemd/man/",
+      "tool": "chsh"
     },
     {
-      "id": "r264",
+      "id": "linux-specifics-copy-to-the-clipboard",
       "category": "Linux specifics",
-      "tool": "printf",
       "title": "Copy to the clipboard",
       "command": "printf '%s\\n' hello | xclip -selection clipboard",
       "explanation": "X11. On Wayland use wl-copy. macOS uses pbcopy.",
       "level": "Intermediate",
       "effect": "Write",
-      "source": "https://www.freedesktop.org/software/systemd/man/"
+      "source": "https://www.freedesktop.org/software/systemd/man/",
+      "tool": "printf"
     },
     {
-      "id": "r265",
+      "id": "linux-specifics-open-a-file-with-the-desktop-default",
       "category": "Linux specifics",
-      "tool": "xdg-open",
       "title": "Open a file with the desktop default",
       "command": "xdg-open README.md",
       "explanation": "The Linux counterpart to macOS open. Needs a desktop session.",
       "level": "Start",
       "effect": "Run",
-      "source": "https://www.freedesktop.org/software/systemd/man/"
+      "source": "https://www.freedesktop.org/software/systemd/man/",
+      "tool": "xdg-open"
     },
     {
-      "id": "r266",
+      "id": "linux-specifics-check-your-kernel",
       "category": "Linux specifics",
-      "tool": "uname",
       "title": "Check your kernel",
       "command": "uname -srm",
       "explanation": "Kernel name, release and machine architecture. Some tools ship separate arm64 and x86_64 builds.",
       "level": "Start",
       "effect": "Inspect",
-      "source": "https://www.freedesktop.org/software/systemd/man/"
+      "source": "https://www.freedesktop.org/software/systemd/man/",
+      "tool": "uname"
     },
     {
-      "id": "r267",
+      "id": "linux-specifics-inspect-a-user-s-groups",
       "category": "Linux specifics",
-      "tool": "id",
       "title": "Inspect a user's groups",
       "command": "id -nG",
       "explanation": "Shows your groups. Running Docker without sudo requires membership in the docker group, which is equivalent to root access.",
       "level": "Intermediate",
       "effect": "Inspect",
-      "source": "https://www.freedesktop.org/software/systemd/man/"
+      "source": "https://www.freedesktop.org/software/systemd/man/",
+      "tool": "id"
     }
   ],
   "shortcuts": [
@@ -3342,11 +3353,11 @@
   "tools": [
     {
       "name": "zsh",
+      "tier": "Essential",
       "description": "The shell every example in this handbook is written for.",
       "commands": [
         "zsh"
       ],
-      "tier": "Essential",
       "url": "https://zsh.sourceforge.io/Doc/Release/",
       "note": "Default on macOS since Catalina. On Linux, install it and then run chsh -s \"$(command -v zsh)\" to make it your login shell.",
       "install": {
@@ -3358,9 +3369,9 @@
     },
     {
       "name": "zsh-autosuggestions",
+      "tier": "Recommended",
       "description": "Suggests the rest of a command from your history as you type.",
       "commands": [],
-      "tier": "Recommended",
       "url": "https://github.com/zsh-users/zsh-autosuggestions",
       "note": "A plugin, not a command. It has to be sourced from your .zshrc; the package description prints the path to source.",
       "install": {
@@ -3372,9 +3383,9 @@
     },
     {
       "name": "zsh-syntax-highlighting",
+      "tier": "Recommended",
       "description": "Colours a command line as valid or invalid before you press Enter.",
       "commands": [],
-      "tier": "Recommended",
       "url": "https://github.com/zsh-users/zsh-syntax-highlighting",
       "note": "Source it last in your .zshrc, after every other plugin, or it will not see later keybindings.",
       "install": {
@@ -3386,11 +3397,11 @@
     },
     {
       "name": "direnv",
+      "tier": "Optional",
       "description": "Loads and unloads environment variables when you enter or leave a directory.",
       "commands": [
         "direnv"
       ],
-      "tier": "Optional",
       "url": "https://direnv.net/",
       "note": "Needs a shell hook in your .zshrc. It executes .envrc files, so only allow them in repositories you trust.",
       "install": {
@@ -3402,11 +3413,11 @@
     },
     {
       "name": "fzf",
+      "tier": "Essential",
       "description": "Fuzzy finder. Provides Ctrl+R history search and Ctrl+T file search.",
       "commands": [
         "fzf"
       ],
-      "tier": "Essential",
       "url": "https://github.com/junegunn/fzf",
       "note": "The key bindings are a separate setup step; see the project README for the line to add to your .zshrc.",
       "install": {
@@ -3418,11 +3429,13 @@
     },
     {
       "name": "zoxide",
+      "tier": "Essential",
       "description": "Directory jumper that learns where you actually work. Provides z and zi.",
       "commands": [
-        "zoxide"
+        "zoxide",
+        "z",
+        "zi"
       ],
-      "tier": "Essential",
       "url": "https://github.com/ajeetdsouza/zoxide",
       "note": "Needs eval \"$(zoxide init zsh)\" in your .zshrc. Older Debian and Ubuntu releases ship a version without zi.",
       "install": {
@@ -3434,11 +3447,11 @@
     },
     {
       "name": "fd",
+      "tier": "Essential",
       "description": "Fast, sensible file finder. A friendlier front end than find.",
       "commands": [
         "fd"
       ],
-      "tier": "Essential",
       "url": "https://github.com/sharkdp/fd",
       "note": "On Debian and Ubuntu the binary is installed as fdfind; alias fd=fdfind or symlink it.",
       "install": {
@@ -3450,11 +3463,11 @@
     },
     {
       "name": "ripgrep",
+      "tier": "Essential",
       "description": "Fast recursive content search that respects .gitignore.",
       "commands": [
         "rg"
       ],
-      "tier": "Essential",
       "url": "https://github.com/BurntSushi/ripgrep",
       "note": "",
       "install": {
@@ -3466,11 +3479,11 @@
     },
     {
       "name": "eza",
+      "tier": "Recommended",
       "description": "Modern ls replacement with colours, icons, tree view and Git status.",
       "commands": [
         "eza"
       ],
-      "tier": "Recommended",
       "url": "https://github.com/eza-community/eza",
       "note": "Not in older Debian and Ubuntu archives; the project documents an apt repository for those releases.",
       "install": {
@@ -3482,11 +3495,11 @@
     },
     {
       "name": "bat",
+      "tier": "Recommended",
       "description": "cat with syntax highlighting, line numbers and paging.",
       "commands": [
         "bat"
       ],
-      "tier": "Recommended",
       "url": "https://github.com/sharkdp/bat",
       "note": "On Debian and Ubuntu the binary is installed as batcat; alias bat=batcat or symlink it.",
       "install": {
@@ -3498,11 +3511,11 @@
     },
     {
       "name": "tree",
+      "tier": "Optional",
       "description": "Prints a directory as an indented tree.",
       "commands": [
         "tree"
       ],
-      "tier": "Optional",
       "url": "https://oldmanprogrammer.net/source.php?dir=projects/tree",
       "note": "",
       "install": {
@@ -3514,11 +3527,11 @@
     },
     {
       "name": "glow",
+      "tier": "Optional",
       "description": "Renders Markdown readably in the terminal.",
       "commands": [
         "glow"
       ],
-      "tier": "Optional",
       "url": "https://github.com/charmbracelet/glow",
       "note": "Packaged on Arch and Fedora; on Debian and Ubuntu use the Charm apt repository or a release binary.",
       "install": {
@@ -3530,11 +3543,11 @@
     },
     {
       "name": "tealdeer",
+      "tier": "Recommended",
       "description": "Fast client for tldr, the community cheat sheets. Provides tldr.",
       "commands": [
         "tldr"
       ],
-      "tier": "Recommended",
       "url": "https://github.com/tealdeer-rs/tealdeer",
       "note": "Run tldr --update once after installing to fetch the page cache.",
       "install": {
@@ -3546,11 +3559,11 @@
     },
     {
       "name": "jq",
+      "tier": "Essential",
       "description": "Query and reshape JSON on the command line.",
       "commands": [
         "jq"
       ],
-      "tier": "Essential",
       "url": "https://jqlang.github.io/jq/manual/",
       "note": "",
       "install": {
@@ -3562,11 +3575,11 @@
     },
     {
       "name": "yq",
+      "tier": "Recommended",
       "description": "The same idea as jq, for YAML, TOML and XML.",
       "commands": [
         "yq"
       ],
-      "tier": "Recommended",
       "url": "https://mikefarah.gitbook.io/yq/",
       "note": "Debian, Ubuntu and Fedora package a different, Python-based yq. For the Go yq used here, install the release binary from the project page.",
       "install": {
@@ -3578,11 +3591,11 @@
     },
     {
       "name": "jless",
+      "tier": "Optional",
       "description": "Pager for large JSON documents. Fold, search and navigate instead of scrolling.",
       "commands": [
         "jless"
       ],
-      "tier": "Optional",
       "url": "https://jless.io/",
       "note": "Not packaged on Debian, Ubuntu or Fedora; install with cargo install jless or a release binary.",
       "install": {
@@ -3594,11 +3607,11 @@
     },
     {
       "name": "sd",
+      "tier": "Optional",
       "description": "Find and replace with plain syntax. An easier sed for simple substitutions.",
       "commands": [
         "sd"
       ],
-      "tier": "Optional",
       "url": "https://github.com/chmln/sd",
       "note": "sd rewrites files in place. Preview with ripgrep first; it has no undo.",
       "install": {
@@ -3610,11 +3623,11 @@
     },
     {
       "name": "tokei",
+      "tier": "Optional",
       "description": "Counts lines of code by language.",
       "commands": [
         "tokei"
       ],
-      "tier": "Optional",
       "url": "https://github.com/XAMPPRocky/tokei",
       "note": "",
       "install": {
@@ -3626,11 +3639,11 @@
     },
     {
       "name": "git",
+      "tier": "Essential",
       "description": "Version control. The handbook assumes a recent version.",
       "commands": [
         "git"
       ],
-      "tier": "Essential",
       "url": "https://git-scm.com/docs",
       "note": "macOS ships an Xcode version of Git. Installing it via Homebrew keeps it current.",
       "install": {
@@ -3642,11 +3655,11 @@
     },
     {
       "name": "gh",
+      "tier": "Recommended",
       "description": "GitHub from the terminal: pull requests, issues, releases, CI runs.",
       "commands": [
         "gh"
       ],
-      "tier": "Recommended",
       "url": "https://cli.github.com/manual/",
       "note": "Debian, Ubuntu and Fedora need the GitHub apt/dnf repository first; the manual documents the exact steps.",
       "install": {
@@ -3658,11 +3671,11 @@
     },
     {
       "name": "git-delta",
+      "tier": "Recommended",
       "description": "Readable, syntax-highlighted diffs for git diff and git log.",
       "commands": [
         "delta"
       ],
-      "tier": "Recommended",
       "url": "https://dandavison.github.io/delta/",
       "note": "Configure it as your pager in .gitconfig; installing alone changes nothing.",
       "install": {
@@ -3674,11 +3687,11 @@
     },
     {
       "name": "git-lfs",
+      "tier": "Optional",
       "description": "Stores large binary files outside the Git history.",
       "commands": [
         "git-lfs"
       ],
-      "tier": "Optional",
       "url": "https://git-lfs.com/",
       "note": "Run git lfs install once per machine after installing.",
       "install": {
@@ -3690,11 +3703,11 @@
     },
     {
       "name": "lazygit",
+      "tier": "Optional",
       "description": "Full-screen Git interface for staging hunks and reading history.",
       "commands": [
         "lazygit"
       ],
-      "tier": "Optional",
       "url": "https://github.com/jesseduffield/lazygit",
       "note": "Not in the Debian or Ubuntu archives; use the release binary from the project page.",
       "install": {
@@ -3706,11 +3719,11 @@
     },
     {
       "name": "btop",
+      "tier": "Recommended",
       "description": "Resource monitor for CPU, memory, disks, network and processes.",
       "commands": [
         "btop"
       ],
-      "tier": "Recommended",
       "url": "https://github.com/aristocratos/btop",
       "note": "",
       "install": {
@@ -3722,11 +3735,11 @@
     },
     {
       "name": "htop",
+      "tier": "Optional",
       "description": "The classic interactive process viewer.",
       "commands": [
         "htop"
       ],
-      "tier": "Optional",
       "url": "https://htop.dev/",
       "note": "",
       "install": {
@@ -3738,11 +3751,11 @@
     },
     {
       "name": "procs",
+      "tier": "Optional",
       "description": "ps with readable columns, colour and search.",
       "commands": [
         "procs"
       ],
-      "tier": "Optional",
       "url": "https://github.com/dalance/procs",
       "note": "",
       "install": {
@@ -3754,11 +3767,11 @@
     },
     {
       "name": "dust",
+      "tier": "Optional",
       "description": "Shows which directories are actually using your disk.",
       "commands": [
         "dust"
       ],
-      "tier": "Optional",
       "url": "https://github.com/bootandy/dust",
       "note": "The Debian, Ubuntu and Fedora package is named du-dust; the binary is still dust.",
       "install": {
@@ -3770,11 +3783,11 @@
     },
     {
       "name": "duf",
+      "tier": "Optional",
       "description": "Readable df: free space per filesystem.",
       "commands": [
         "duf"
       ],
-      "tier": "Optional",
       "url": "https://github.com/muesli/duf",
       "note": "",
       "install": {
@@ -3786,11 +3799,11 @@
     },
     {
       "name": "lsof",
+      "tier": "Essential",
       "description": "Lists open files and sockets. How you find what is holding a port.",
       "commands": [
         "lsof"
       ],
-      "tier": "Essential",
       "url": "https://github.com/lsof-org/lsof",
       "note": "Already present on macOS. On Linux, ss -tlnp from iproute2 answers the same port question and is usually installed.",
       "install": {
@@ -3802,11 +3815,11 @@
     },
     {
       "name": "hyperfine",
+      "tier": "Optional",
       "description": "Benchmarks commands with warmup runs and statistics.",
       "commands": [
         "hyperfine"
       ],
-      "tier": "Optional",
       "url": "https://github.com/sharkdp/hyperfine",
       "note": "",
       "install": {
@@ -3818,11 +3831,11 @@
     },
     {
       "name": "watchexec",
+      "tier": "Optional",
       "description": "Re-runs a command when files change.",
       "commands": [
         "watchexec"
       ],
-      "tier": "Optional",
       "url": "https://github.com/watchexec/watchexec",
       "note": "Not in the Debian or Ubuntu archives; use cargo install watchexec-cli or a release binary.",
       "install": {
@@ -3834,11 +3847,11 @@
     },
     {
       "name": "trash",
+      "tier": "Recommended",
       "description": "Deletes to the desktop trash instead of unlinking. A safer rm for interactive use.",
       "commands": [
         "trash"
       ],
-      "tier": "Recommended",
       "url": "https://github.com/sindresorhus/trash-cli",
       "note": "These are two different projects with the same idea. On Linux the command is usually trash-put.",
       "install": {
@@ -3850,11 +3863,11 @@
     },
     {
       "name": "curl",
+      "tier": "Essential",
       "description": "Transfers data over HTTP and many other protocols.",
       "commands": [
         "curl"
       ],
-      "tier": "Essential",
       "url": "https://curl.se/docs/manpage.html",
       "note": "",
       "install": {
@@ -3866,11 +3879,11 @@
     },
     {
       "name": "wget",
+      "tier": "Optional",
       "description": "Downloads files, including recursive mirroring.",
       "commands": [
         "wget"
       ],
-      "tier": "Optional",
       "url": "https://www.gnu.org/software/wget/manual/",
       "note": "",
       "install": {
@@ -3882,11 +3895,11 @@
     },
     {
       "name": "xh",
+      "tier": "Optional",
       "description": "Friendly HTTP client for testing APIs. Prints headers and JSON readably.",
       "commands": [
         "xh"
       ],
-      "tier": "Optional",
       "url": "https://github.com/ducaale/xh",
       "note": "Not in the Debian or Ubuntu archives; use the release binary from the project page.",
       "install": {
@@ -3898,11 +3911,11 @@
     },
     {
       "name": "neovim",
+      "tier": "Recommended",
       "description": "The editor the handbook assumes when it says \"open the file\".",
       "commands": [
         "nvim"
       ],
-      "tier": "Recommended",
       "url": "https://neovim.io/doc/",
       "note": "Distribution packages lag upstream. If a plugin requires a newer Neovim, use the official AppImage or release archive.",
       "install": {
@@ -3914,11 +3927,11 @@
     },
     {
       "name": "tmux",
+      "tier": "Optional",
       "description": "Keeps shell sessions alive across disconnects and splits one terminal into panes.",
       "commands": [
         "tmux"
       ],
-      "tier": "Optional",
       "url": "https://github.com/tmux/tmux/wiki",
       "note": "",
       "install": {
@@ -3930,12 +3943,12 @@
     },
     {
       "name": "uv",
+      "tier": "Recommended",
       "description": "Installs Python versions, manages project environments and runs isolated CLI tools.",
       "commands": [
         "uv",
         "uvx"
       ],
-      "tier": "Recommended",
       "url": "https://docs.astral.sh/uv/",
       "note": "On Debian, Ubuntu and older Fedora, use the official installer at https://astral.sh/uv/install.sh after reading it.",
       "install": {
@@ -3947,13 +3960,13 @@
     },
     {
       "name": "volta",
+      "tier": "Recommended",
       "description": "Pins a Node and package-manager version per project, then switches automatically.",
       "commands": [
         "volta",
         "node",
         "npm"
       ],
-      "tier": "Recommended",
       "url": "https://docs.volta.sh/reference/",
       "note": "On Debian, Ubuntu and Fedora, use the installer at https://get.volta.sh. Volta then installs Node itself: volta install node@22.",
       "install": {
@@ -3965,11 +3978,11 @@
     },
     {
       "name": "go",
+      "tier": "Optional",
       "description": "The Go toolchain. Needed to build some of the tools listed here from source.",
       "commands": [
         "go"
       ],
-      "tier": "Optional",
       "url": "https://go.dev/doc/",
       "note": "",
       "install": {
@@ -3981,11 +3994,11 @@
     },
     {
       "name": "docker",
+      "tier": "Optional",
       "description": "Builds and runs containers. Provides docker and docker compose.",
       "commands": [
         "docker"
       ],
-      "tier": "Optional",
       "url": "https://docs.docker.com/reference/cli/docker/",
       "note": "On Linux the engine runs natively; enable it with sudo systemctl enable --now docker and add yourself to the docker group. On macOS the CLI needs a VM: see colima. Docker's own repository usually carries a newer engine than the distribution package.",
       "install": {
@@ -3997,11 +4010,11 @@
     },
     {
       "name": "docker-compose",
+      "tier": "Optional",
       "description": "Runs multi-container projects from a compose.yaml file.",
       "commands": [
         "docker compose"
       ],
-      "tier": "Optional",
       "url": "https://docs.docker.com/compose/",
       "note": "This is the v2 plugin invoked as docker compose, with a space. The old docker-compose script is a separate, retired project.",
       "install": {
@@ -4013,11 +4026,11 @@
     },
     {
       "name": "colima",
+      "tier": "Optional",
       "description": "Runs the Linux VM that Docker needs on macOS. macOS only.",
       "commands": [
         "colima"
       ],
-      "tier": "Optional",
       "url": "https://github.com/abiosoft/colima",
       "note": "macOS only, and not needed on Linux, where containers run on the host kernel. An alternative to Docker Desktop.",
       "install": {
@@ -4029,11 +4042,11 @@
     },
     {
       "name": "lazydocker",
+      "tier": "Optional",
       "description": "Full-screen view of containers, logs and resource use.",
       "commands": [
         "lazydocker"
       ],
-      "tier": "Optional",
       "url": "https://github.com/jesseduffield/lazydocker",
       "note": "Not in the Debian, Ubuntu or Fedora archives; use the release binary from the project page.",
       "install": {
@@ -4045,11 +4058,11 @@
     },
     {
       "name": "dive",
+      "tier": "Optional",
       "description": "Inspects an image layer by layer to find what is making it large.",
       "commands": [
         "dive"
       ],
-      "tier": "Optional",
       "url": "https://github.com/wagoodman/dive",
       "note": "Not in the Debian, Ubuntu or Fedora archives; the project publishes .deb and .rpm packages.",
       "install": {
@@ -4061,11 +4074,11 @@
     },
     {
       "name": "hadolint",
+      "tier": "Optional",
       "description": "Lints Dockerfiles for common mistakes.",
       "commands": [
         "hadolint"
       ],
-      "tier": "Optional",
       "url": "https://github.com/hadolint/hadolint",
       "note": "Packaged on Arch via the AUR; elsewhere use the release binary from the project page.",
       "install": {
@@ -4077,11 +4090,11 @@
     },
     {
       "name": "kubernetes-cli",
+      "tier": "Optional",
       "description": "Talks to a Kubernetes cluster. Provides kubectl.",
       "commands": [
         "kubectl"
       ],
-      "tier": "Optional",
       "url": "https://kubernetes.io/docs/reference/kubectl/",
       "note": "Debian and Ubuntu need the Kubernetes apt repository first; the documentation covers the steps.",
       "install": {
@@ -4093,11 +4106,11 @@
     },
     {
       "name": "k9s",
+      "tier": "Optional",
       "description": "Full-screen Kubernetes browser for pods, logs and events.",
       "commands": [
         "k9s"
       ],
-      "tier": "Optional",
       "url": "https://k9scli.io/",
       "note": "Not in the Debian, Ubuntu or Fedora archives; use the release binary from the project page.",
       "install": {
@@ -4109,11 +4122,11 @@
     },
     {
       "name": "helm",
+      "tier": "Optional",
       "description": "Installs and upgrades packaged Kubernetes applications.",
       "commands": [
         "helm"
       ],
-      "tier": "Optional",
       "url": "https://helm.sh/docs/",
       "note": "Debian and Ubuntu need the Helm apt repository; the documentation covers the steps.",
       "install": {
@@ -4125,11 +4138,11 @@
     },
     {
       "name": "ollama",
+      "tier": "Optional",
       "description": "Downloads and runs language models locally.",
       "commands": [
         "ollama"
       ],
-      "tier": "Optional",
       "url": "https://ollama.com/",
       "note": "On Debian, Ubuntu and Fedora, use the installer at https://ollama.com/install.sh after reading it. Models are large: check disk space first, and expect memory use in the same order as the model file.",
       "install": {
@@ -4141,12 +4154,12 @@
     },
     {
       "name": "llama.cpp",
+      "tier": "Optional",
       "description": "Runs GGUF models directly. Provides llama-cli and llama-server.",
       "commands": [
         "llama-cli",
         "llama-server"
       ],
-      "tier": "Optional",
       "url": "https://github.com/ggml-org/llama.cpp",
       "note": "Most Linux users build it from source to match their GPU; the repository documents the build flags.",
       "install": {
@@ -4158,11 +4171,11 @@
     },
     {
       "name": "imagemagick",
+      "tier": "Optional",
       "description": "Converts, resizes and inspects images. Provides magick.",
       "commands": [
         "magick"
       ],
-      "tier": "Optional",
       "url": "https://imagemagick.org/script/command-line-processing.php",
       "note": "",
       "install": {
@@ -4174,11 +4187,11 @@
     },
     {
       "name": "ghostscript",
+      "tier": "Optional",
       "description": "Processes PostScript and PDF. Provides gs.",
       "commands": [
         "gs"
       ],
-      "tier": "Optional",
       "url": "https://www.ghostscript.com/documentation/",
       "note": "If you alias gs to git status, the alias wins. Call the full path to reach Ghostscript.",
       "install": {
@@ -4190,11 +4203,11 @@
     },
     {
       "name": "tesseract",
+      "tier": "Optional",
       "description": "Extracts text from images (OCR).",
       "commands": [
         "tesseract"
       ],
-      "tier": "Optional",
       "url": "https://tesseract-ocr.github.io/",
       "note": "Each language is a separate data package, for example tesseract-ocr-deu on Debian and Ubuntu.",
       "install": {
@@ -4210,25 +4223,29 @@
       "macOS",
       "Homebrew",
       "brew install",
-      "https://brew.sh"
+      "https://brew.sh",
+      "brew"
     ],
     [
       "Debian / Ubuntu",
       "apt",
       "sudo apt install -y",
-      "https://wiki.debian.org/Apt"
+      "https://wiki.debian.org/Apt",
+      "apt"
     ],
     [
       "Fedora / RHEL",
       "dnf",
       "sudo dnf install -y",
-      "https://dnf.readthedocs.io/"
+      "https://dnf.readthedocs.io/",
+      "dnf"
     ],
     [
       "Arch",
       "pacman",
       "sudo pacman -S --needed",
-      "https://wiki.archlinux.org/title/Pacman"
+      "https://wiki.archlinux.org/title/Pacman",
+      "pacman"
     ]
   ],
   "extras": [
@@ -4261,5 +4278,24 @@
     "Packages & maintenance",
     "macOS specifics",
     "Linux specifics"
+  ],
+  "levels": [
+    "Start",
+    "Intermediate",
+    "Advanced"
+  ],
+  "effects": [
+    "Inspect",
+    "Run",
+    "Write",
+    "Destructive",
+    "Remote write",
+    "Disruptive",
+    "Network"
+  ],
+  "tiers": [
+    "Essential",
+    "Recommended",
+    "Optional"
   ]
 }
