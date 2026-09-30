@@ -12,3 +12,6 @@ __pycache__/
 # Secrets belong in ~/.zshrc.local, never in dotfiles/.
 *-inventory.json
 .zshrc.local
+
+# gh login token
+hosts.yml

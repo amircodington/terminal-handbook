@@ -1,9 +1,9 @@
 # Terminal setup — step by step
 
 This sets up the same terminal I use: **zsh** with autosuggestions, syntax
-highlighting, fzf and zoxide, the **Oh My Posh "Grok Red"** prompt, the
+highlighting, fzf and zoxide, the **Oh My Posh "Grok Red"** prompt (plus the "atomic" theme), the
 **Ghostty** terminal with a matching theme, plus Git (delta), Neovim
-(LazyVim), Zellij and the CLI tools in the [`Brewfile`](../Brewfile).
+(LazyVim), Zellij, btop, htop, the GitHub CLI settings and the CLI tools in the [`Brewfile`](../Brewfile).
 
 It works on **macOS** and **Linux** (Debian/Ubuntu, Fedora, Arch). Both use
 Homebrew, so the same `Brewfile` and the same `.zshrc` work on both.
@@ -22,6 +22,9 @@ single source of truth: edit a file in the repo, open a new terminal, done.
 | `dotfiles/git/config`, `dotfiles/git/ignore` | `~/.config/git/` |
 | `dotfiles/nvim/` | `~/.config/nvim/` |
 | `dotfiles/zellij/` | `~/.config/zellij/` |
+| `dotfiles/btop/btop.conf` | `~/.config/btop/btop.conf` |
+| `dotfiles/htop/htoprc` | `~/.config/htop/htoprc` |
+| `dotfiles/gh/config.yml` | `~/.config/gh/config.yml` (never `hosts.yml`, which holds your login token) |
 
 Anything already at a target is **moved** (not deleted) to
 `~/.config/terminal-backups/install-<date>/` first.
@@ -158,38 +161,35 @@ less install.sh
 
 On Linux the installer also:
 
-- installs build tools and `zsh` with your distribution's package manager,
-  which needs `sudo`
+- installs build tools, `zsh`, `lsof`, `unzip` and `xdg-utils` with your
+  distribution's package manager, which needs `sudo` (plus the Vazirmatn font
+  for Persian text on Debian/Ubuntu and Fedora)
 - installs Homebrew into `/home/linuxbrew/.linuxbrew`, so you get the same
   tool versions as on macOS
 - installs the GeistMono Nerd Font into `~/.local/share/fonts` with
   `oh-my-posh font install`
+- installs **Ghostty**: `pacman` on Arch, the `scottames/ghostty` COPR on
+  Fedora, and Snap elsewhere (Ubuntu)
 
 `chsh` asks for your password. **Log out and back in** for zsh to become your
 login shell.
 
-### 4. Install Ghostty
+### 4. Open Ghostty
 
-Homebrew cannot install Ghostty on Linux. Use your distribution's package:
+Open **Ghostty** from your app launcher. The installer has already set it up
+with the same config, theme and font as on macOS.
 
-```bash
-sudo pacman -S ghostty
-```
+If the installer printed "No Ghostty package found", install it using the
+official list at <https://ghostty.org/docs/install/binary>. The config is
+already in place.
 
-That is Arch. On Ubuntu and other distributions that have Snap:
+Differences from macOS:
 
-```bash
-sudo snap install ghostty --classic
-```
-
-For Fedora, Debian and everything else, see the official list at
-<https://ghostty.org/docs/install/binary>.
-
-The config is already linked to `~/.config/ghostty/`. Ghostty ignores the
-`macos-*` options in it on Linux.
-
-Optional: to show Persian script properly, install the Vazirmatn font
-(`sudo apt install fonts-vazirmatn` on Debian/Ubuntu).
+- Ghostty ignores the `macos-*` options on Linux.
+- `cmd` in the config means the Super key, so the reload key is
+  `super+shift+r`. Ghostty's own `ctrl+shift+,` also reloads.
+- The background blur only works on KDE Plasma. Elsewhere you get a
+  transparent window without blur.
 
 ### 5. Personal settings
 
@@ -220,7 +220,7 @@ Same as macOS: run `nvim` once and let it install.
 | I want to… | Run |
 | --- | --- |
 | reload the shell after editing `.zshrc` | `reload` |
-| reload Ghostty after editing its config | `cmd+shift+r` |
+| reload Ghostty after editing its config | `cmd+shift+r` (Linux: `super+shift+r`) |
 | see which Brewfile packages are missing | `brew bundle check --file Brewfile` |
 | update everything | `brew update && brew upgrade` |
 | re-link configs only (for example after a `git pull`) | `./install.sh --links-only` |
