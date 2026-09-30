@@ -8,8 +8,7 @@ __pycache__/
 .idea/
 *.swp
 
-# Nothing machine-specific belongs in this repository.
-# If you generate a local Brewfile or package dump while reading the handbook,
-# it stays out of Git.
-Brewfile
+# Machine-only files and package dumps stay out of Git.
+# Secrets belong in ~/.zshrc.local, never in dotfiles/.
 *-inventory.json
+.zshrc.local

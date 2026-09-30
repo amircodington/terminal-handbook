@@ -1,0 +1,11 @@
+// Zellij — only overrides; everything else uses built-in defaults.
+// Full reference: zellij setup --dump-config
+
+// Match Ghostty / Oh My Posh.
+theme "tokyo-night-storm"
+
+// Start locked so nvim/shell keys pass through. Ctrl+g toggles lock.
+default_mode "locked"
+
+show_startup_tips false
+show_release_notes false
