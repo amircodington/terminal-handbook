@@ -46,7 +46,7 @@ repo also holds my own terminal setup. It works on **macOS and Linux**:
 - **zsh**: history, completion, fzf, zoxide, autosuggestions, syntax highlighting and aliases
 - **Oh My Posh**: the *Grok Red* prompt theme
 - **Ghostty**: config and the matching *Grok Red* color theme
-- **Git** (delta), **Neovim** (LazyVim), **Zellij**
+- **Git** (delta), **Neovim** (LazyVim), **Zellij**, **btop**, **htop**, **gh** settings
 - a **`Brewfile`** with every tool, the fonts and Ghostty
 
 | Path | What it is |

@@ -15,14 +15,31 @@ say() { printf '\n\033[1;31m==>\033[0m %s\n' "$*"; }
 linux_prereqs() {
   say "Installing Linux prerequisites (needs sudo)"
   if command -v apt-get >/dev/null; then
-    sudo apt-get update && sudo apt-get install -y build-essential procps curl file git zsh
+    sudo apt-get update && sudo apt-get install -y build-essential procps curl file git zsh lsof unzip bzip2 xdg-utils
+    sudo apt-get install -y fonts-vazirmatn || true  # Persian glyphs; not in older releases
   elif command -v dnf >/dev/null; then
-    sudo dnf install -y @development-tools procps-ng curl file git zsh
+    sudo dnf install -y @development-tools procps-ng curl file git zsh lsof unzip bzip2 xdg-utils
+    sudo dnf install -y vazirmatn-fonts || true
   elif command -v pacman >/dev/null; then
-    sudo pacman -S --needed --noconfirm base-devel procps-ng curl file git zsh
+    sudo pacman -S --needed --noconfirm base-devel procps-ng curl file git zsh lsof unzip bzip2 xdg-utils
   else
     echo "Unknown package manager: install build tools, curl, git and zsh yourself, then re-run." >&2
     exit 1
+  fi
+}
+
+# Homebrew has no Ghostty for Linux; use the distro's package (ghostty.org/docs/install/binary).
+linux_ghostty() {
+  command -v ghostty >/dev/null && return
+  say "Installing Ghostty"
+  if command -v pacman >/dev/null; then
+    sudo pacman -S --needed --noconfirm ghostty
+  elif command -v dnf >/dev/null; then
+    sudo dnf copr enable -y scottames/ghostty && sudo dnf install -y ghostty
+  elif command -v snap >/dev/null; then
+    sudo snap install ghostty --classic
+  else
+    echo "  No Ghostty package found for this system; see docs/SETUP.md."
   fi
 }
 
@@ -63,6 +80,9 @@ links() {
   link git/ignore          "$HOME/.config/git/ignore"
   link nvim                "$HOME/.config/nvim"
   link zellij              "$HOME/.config/zellij"
+  link btop/btop.conf      "$HOME/.config/btop/btop.conf"
+  link htop/htoprc         "$HOME/.config/htop/htoprc"
+  link gh/config.yml       "$HOME/.config/gh/config.yml"  # never hosts.yml: it holds your login token
 
   # Machine-only settings and secrets live here, never in the repo.
   [[ -e $HOME/.zshrc.local ]] || printf '# Secrets and machine-only settings (not in Git).\n' > "$HOME/.zshrc.local"
@@ -81,6 +101,7 @@ brew bundle --file "$REPO/Brewfile"
 if [[ $OS == Linux ]]; then
   say "Installing Nerd Font (GeistMono)"
   oh-my-posh font install GeistMono || echo "  font install failed; see docs/SETUP.md"
+  linux_ghostty
 fi
 
 links
@@ -91,5 +112,5 @@ if [[ "$(basename "${SHELL:-}")" != zsh ]]; then
 fi
 
 say "Done. Open a new terminal (Ghostty) to load everything."
-[[ $OS == Linux ]] && echo "Ghostty and Docker Engine are installed separately on Linux: see docs/SETUP.md."
+[[ $OS == Linux ]] && echo "Docker Engine is installed separately on Linux: see docs/SETUP.md."
 exit 0
