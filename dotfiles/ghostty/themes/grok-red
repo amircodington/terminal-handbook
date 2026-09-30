@@ -1,0 +1,25 @@
+# Grok Red — Grok's black/white minimalism with GitHub Dark's red as the accent.
+background = #000000
+foreground = #e7e9ea
+cursor-color = #ff7b72
+cursor-text = #000000
+selection-background = #3d1418
+selection-foreground = #ffffff
+
+# ANSI: GitHub Dark syntax colors on Grok black.
+palette = 0=#202327
+palette = 1=#ff7b72
+palette = 2=#7ee787
+palette = 3=#e3b341
+palette = 4=#79c0ff
+palette = 5=#d2a8ff
+palette = 6=#56d4dd
+palette = 7=#c4c7ca
+palette = 8=#71767b
+palette = 9=#ffa198
+palette = 10=#56d364
+palette = 11=#e3b341
+palette = 12=#a5d6ff
+palette = 13=#d2a8ff
+palette = 14=#7fd3dc
+palette = 15=#ffffff

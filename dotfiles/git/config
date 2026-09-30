@@ -1,0 +1,15 @@
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[core]
+	autocrlf = input
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+[merge]
+	conflictStyle = zdiff3

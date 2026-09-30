@@ -1,0 +1,81 @@
+# ==============================================================================
+#  Ghostty — Grok Red
+#  Full-stack web + AI / deep-learning / RAG / agentic development
+# ==============================================================================
+# Reload after editing:  cmd+shift+r   (or restart Ghostty)
+# Inspect resolved config:  ghostty +show-config
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+#  Theme & colors
+# ------------------------------------------------------------------------------
+# Custom theme: ~/.config/ghostty/themes/grok-red
+theme = grok-red
+
+# Glass: black dominant, desktop softly visible.
+background-opacity = 0.78
+background-blur = 16
+
+
+# ------------------------------------------------------------------------------
+#  Font
+# ------------------------------------------------------------------------------
+# Geist Mono (clean, Grok-like). No ligatures; for ligatures switch back to:
+#   font-family = JetBrainsMono Nerd Font
+font-family = GeistMono Nerd Font
+font-size = 16
+
+# Persian/Arabic glyphs from Vazirmatn instead of the Courier New fallback.
+# (Letter order is still LTR: Ghostty has no RTL/bidi support yet.)
+font-codepoint-map = U+0600-U+06FF,U+0750-U+077F,U+08A0-U+08FF,U+FB50-U+FDFF,U+FE70-U+FEFF=Vazirmatn
+
+# Slightly heavier strokes.
+font-thicken = true
+
+
+# ------------------------------------------------------------------------------
+#  Cursor
+# ------------------------------------------------------------------------------
+cursor-style = bar
+cursor-style-blink = true
+adjust-cursor-thickness = 2
+mouse-hide-while-typing = true
+
+
+# ------------------------------------------------------------------------------
+#  Window / chrome
+# ------------------------------------------------------------------------------
+window-padding-x = 14
+window-padding-y = 12
+window-padding-balance = true
+window-colorspace = display-p3
+window-save-state = always
+window-inherit-working-directory = true
+window-inherit-font-size = true
+
+macos-titlebar-style = transparent
+macos-option-as-alt = true
+
+# Dim panes that don't have focus.
+unfocused-split-opacity = 0.85
+
+
+# ------------------------------------------------------------------------------
+#  Shell integration & clipboard
+# ------------------------------------------------------------------------------
+shell-integration = zsh
+shell-integration-features = cursor,sudo,title,ssh-env
+copy-on-select = clipboard
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+confirm-close-surface = true
+
+
+# ------------------------------------------------------------------------------
+#  Keybindings  (tabs/splits/font-size/cmd+k use Ghostty defaults)
+# ------------------------------------------------------------------------------
+keybind = cmd+shift+r=reload_config
+
+# More breathing room between text rows.
+adjust-cell-height = 12%

@@ -38,16 +38,38 @@ web development, containers, Python and local AI, data and media, networking,
 editors, packages, plus separate **macOS specifics** and **Linux specifics**
 sections for the places where the two genuinely differ.
 
+## My terminal setup (optional)
+
+The handbook is only a page, and it never touches your system. Separately, the
+repo also holds my own terminal setup. It works on **macOS and Linux**:
+
+- **zsh**: history, completion, fzf, zoxide, autosuggestions, syntax highlighting and aliases
+- **Oh My Posh**: the *Grok Red* prompt theme
+- **Ghostty**: config and the matching *Grok Red* color theme
+- **Git** (delta), **Neovim** (LazyVim), **Zellij**
+- a **`Brewfile`** with every tool, the fonts and Ghostty
+
+| Path | What it is |
+| --- | --- |
+| [`install.sh`](install.sh) | One-command installer: Homebrew, the `Brewfile`, and symlinks for the configs |
+| [`Brewfile`](Brewfile) | Every package, with the macOS-only items in one block |
+| [`dotfiles/`](dotfiles) | The config files themselves |
+| [`docs/SETUP.md`](docs/SETUP.md) | **Step-by-step guide for macOS and Linux** |
+
+Quick start, once you have read [`docs/SETUP.md`](docs/SETUP.md) and `install.sh`:
+
+```bash
+git clone https://github.com/amircodington/terminal-handbook.git ~/Workspace/terminal-handbook && cd ~/Workspace/terminal-handbook && ./install.sh
+```
+
+Anything the installer would replace is moved to
+`~/.config/terminal-backups/` first. Secrets go in `~/.zshrc.local`, which is
+never committed.
+
+This setup is personal. Use it as a starting point and read what it does. That
+is the same advice the handbook gives about every command.
+
 ## What this is *not*
-
-**It is not a dotfiles repo.** There are no `.zshrc`, `.gitconfig`, prompt
-themes or terminal configs here, and nothing in this repository will touch your
-system. It does not install anything, change any setting, or run any command.
-The page renders text; you decide what to type.
-
-That is deliberate. Shell configuration is personal, and copying someone else's
-blindly is how people end up with a shell they cannot debug. This handbook
-teaches you to read commands so that you can write your own configuration.
 
 **It is not a complete reference.** It is a curated set of worked examples. For
 complete syntax, use `man` and `--help` — which the handbook repeatedly tells
@@ -188,7 +210,8 @@ in ways worth knowing before you trust it:
   where you are, that is a bug — please report it.
 - **The tone is confident. Treat it as a well-read colleague's advice, not as
   authority.** `man` is the authority.
-- **Nothing here runs automatically**, which limits the blast radius of any
+- **Nothing here runs automatically.** `install.sh` runs only when you run it,
+  and the handbook itself never runs anything. That limits the blast radius of any
   mistake in it to a command you chose to copy. Read before you paste. That is
   the whole point of the handbook anyway.
 
